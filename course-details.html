@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programme </title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<script>
+  // Function to load HTML content
+  function loadHTML(elementId, filePath) {
+    fetch(filePath)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById(elementId).innerHTML = data;
+      })
+      .catch(error => console.error('Error loading HTML:', error));
+  }
+
+  // Load header and footer
+  loadHTML('header', 'header.html');
+  loadHTML('footer', 'footer.html');
+</script>
+
+<script>
+  // Get the course ID from the URL (e.g., course-details.html?id=1)
+  const params = new URLSearchParams(window.location.search);
+  const courseId = params.get('id');
+
+  // Fetch the course data from the backend where id = courseId
+  if (courseId) {
+    fetch(`http://localhost:8080/programmes/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+        // Update the course name and description in the HTML
+        document.getElementById('course-name').textContent = data.name;
+        document.getElementById('course-description').textContent = data.description;
+        document.getElementById('course-duration').textContent = data.duration;
+        document.getElementById('course-fees').innerHTML = data.fees.split('/').join('<br>');
+        document.getElementById('course-level').textContent = data.level;
+      })
+      .catch(error => console.error('Error fetching course details:', error));
+  } else {
+    console.error('No course ID provided in URL');
+  }
+
+  // Fetch the branches based on the programme_id
+  if (courseId) {
+    fetch(`http://localhost:8080/programmes/branches/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+        const branchList = document.querySelector('.branch-list');
+        branchList.innerHTML = ''; // Clear previous content
+        data.forEach(branch => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<i class="bi bi-record-fill me-3"></i>${branch.name}`;
+          branchList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching branch data:', error));
+
+  }
+
+  //fetch the intakes
+  if (courseId) {
+    fetch(`http://localhost:8080/programmes/intake/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+        const intakeList = document.querySelector('.intake-list');
+        intakeList.innerHTML = '';
+
+        let year1Intake = '';
+        let year2Intake = '';
+
+        data.forEach(intake => {
+
+          switch (intake.branch_name) {
+            case "Kuala Lumpur":
+              intake.branch_name = "KL";
+              break;
+            case "Penang":
+              intake.branch_name = "PG";
+              break;
+            case "Johor":
+              intake.branch_name = "JH";
+              break;
+            case "Perak":
+              intake.branch_name = "PK";
+              break;
+            case "Sabah":
+              intake.branch_name = "SB";
+              break;
+            case "Sarawak":
+              intake.branch_name = "SW";
+              break;
+            case "Pahang":
+              intake.branch_name = "PH";
+              break;
+          }
+
+          const branchName = intake.branch_name; // assuming branch name is returned
+          const intakeMonth = `${intake.month} (${branchName})`;
+
+          if (intake.year === 1) {
+            year1Intake += '<i class="bi bi-record-fill me-3"></i>' + intakeMonth + '<br>';
+          } else if (intake.year === 2) {
+            year2Intake += '<i class="bi bi-record-fill me-3"></i>' + intakeMonth + '<br> ';
+
+          }
+        });
+
+        const year1ListItem = `
+                <li><strong>Year 1:</strong> <br> ${year1Intake} </li>
+            `;
+
+        const year2ListItem = `
+                <li><strong>Year 2:</strong> <br>  ${year2Intake}</li>
+            `;
+
+
+        intakeList.innerHTML += year1ListItem;
+
+        if (year2Intake !== '') {
+          intakeList.innerHTML += year2ListItem;
+        }
+
+
+      })
+      .catch(error => console.error('Error fetching intake data:', error));
+  }
+
+
+
+
+  // Fetch the programme outlines based on courseId
+  if (courseId) {
+    fetch(`http://localhost:8080/programme_outlines/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+        const courseList = document.querySelector('.course_list');
+        courseList.innerHTML = ''; // Clear the previous contents
+
+        const electiveList = [];
+        const compulsoryList = [];
+
+
+        data.forEach(outline => {
+          if (outline.isElective) {
+            electiveList.push(outline);
+          } else {
+            compulsoryList.push(outline);
+          }
+        })
+
+        courseList.innerHTML += `<h4>Compulsory:</h4>`;
+        compulsoryList.forEach(outline => {
+          const listItem = `
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center course_content-box">
+                        <div class="d-flex justify-content-center align-items-center">
+                          <i class="bi bi-record-fill me-3 style="padding: 0px 10px 0px 10px"></i>
+                          <p style="margin: 0px">${outline.outline}</p>
+                        </div>
+                      
+                      </div>
+                    </li>
+                `;
+          courseList.innerHTML += listItem;
+        });
+
+        // If electives exist, add a separate section for electives
+        if (electiveList.length > 0) {
+          courseList.innerHTML += `<h4 style="margin-top: 50px;">Electives:</h4>`;
+          electiveList.forEach(outline => {
+            const electiveItem = `
+                        <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <i class="bi bi-record-fill" style="padding: 0px 10px 0px 10px"></i>
+                                    <p style="margin: 0px">${outline.outline}</p>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+            courseList.innerHTML += electiveItem;
+          });
+        }
+      })
+      .catch(error => console.error('Error fetching programme outlines:', error));
+  } else {
+    console.error('No course ID provided in URL');
+  }
+
+  // only display career propect for diploma, degree, postgraduate
+  if (courseId) {
+    fetch(`http://localhost:8080/programmes/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+
+        // Display the fourth tab only if the level is not 'Foundation'
+        if (data.level !== 'Foundation') {
+
+          // Add on heading tab
+          const careerTab = `
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="career-tab" data-bs-toggle="tab" data-bs-target="#career"
+                type="button" role="tab" aria-controls="instructor" aria-selected="false">Career Prospect</button>
+            </li>
+          `;
+
+          document.getElementById('myTab').innerHTML += careerTab;
+
+          //Add on careerContent 
+          // Fetch the career prospects data
+          fetch(`http://localhost:8080/career_prospects/${courseId}`)
+            .then(response => response.json())
+            .then(careerData => {
+              // Generate career prospects list dynamically
+
+
+              let careerList = '';
+              careerData.forEach(career => {
+                careerList += `
+                <li><i class="bi bi-check-lg bg-icon"></i> ${career.name}</li>
+              `;
+              });
+
+              // Add the Career Prospect tab content
+              const careerContent = `
+              
+            <div class="tab-pane fade" id="career" role="tabpanel" aria-labelledby="career-tab">
+            <h3>Career Opportunities</h3>
+            <ul class="list-style-2 mt-4">
+            ${careerList}
+            </ul>
+             </div>
+            `;
+              document.getElementById('myTabContent').innerHTML += careerContent;
+            })
+            .catch(error => console.error('Error fetching career prospects:', error));
+
+
+
+        }
+      })
+      .catch(error => console.error('Error fetching course details:', error));
+  } else {
+    console.error('No course ID provided in URL');
+  }
+
+  // Function to fetch requirements based on programme_id
+  // const fetchRequirements = async (courseId) => {
+  //   const response = await fetch(`http://localhost:8080/requirements/${courseId}`);
+  //   const requirements = await response.json();
+  //   return requirements;
+  // };
+
+  // Function to insert the requirements into the DOM
+  const insertRequirements = async (courseId) => {
+    // const requirements = await fetchRequirements(courseId);
+
+    fetch(`http://localhost:8080/programmes/${courseId}`)
+      .then(response => response.json())
+      .then(data => {
+
+        // Choose image src based on programme level
+        let imgSrc;
+
+        switch (data.level) {
+          case 'Bachelor':
+            imgSrc = "assets/img/bachelor.png";
+            break;
+          case 'Diploma':
+            imgSrc = "assets/img/diploma.png";
+            break;
+          case 'Foundation':
+            imgSrc = "assets/img/foundation.png";
+            break;
+          default:
+            imgSrc = "assets/img/default.png";
+            break;
+        }
+
+        const requirementElement = document.createElement('div');
+        requirementElement.innerHTML = `
+          <img src="${imgSrc}" alt="programme-image">
+        `;
+        // const branchList = document.querySelector('.branch-list');
+        // branchList.innerHTML = ''; // Clear previous content
+        // data.forEach(branch => {
+        //   const listItem = document.createElement('li');
+        //   listItem.innerHTML = `<i class="bi bi-record-fill me-3"></i>${branch.name}`;
+        //   branchList.appendChild(listItem);
+        // });
+
+
+
+        const requirementContainer = document.querySelector('.instructor-descriptions');
+        requirementContainer.innerHTML = `<h4>Entry Requirements</h4>`;
+        requirementContainer.appendChild(requirementElement);
+
+      })
+      .catch(error => console.error('Error fetching branch data:', error));
+
+
+
+
+    // requirements.forEach(requirement => {
+    //   const requirementElement = document.createElement('div');
+
+    //   // Split the requirement text by the i), ii), iii) etc.
+    //   let parts = requirement.requirement_text.split(/(\(i\)|\(ii\)|\(iii\)|\(iv\)|\(v\))/);
+
+
+
+
+    //   requirementElement.innerHTML = `
+
+    //       <img src="assets/img/logo.png" alt="image">
+
+
+    //         <h6>${requirement.name}</h6>
+
+    //         <p>${requirement.requirement_text}</p>
+    //          <i class="bi bi-record-fill me-3"></i>
+    //     `;
+    //   requirementContainer.appendChild(requirementElement);
+    // });
+  };
+
+  insertRequirements(courseId);
+
+
+</script>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader"></div>
+  <!-- Progress circle scroll to top -->
+  <div id="progress">
+    <div id="progress-value">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+  </div>
+  <!-- Black Transparent Screen -->
+  <span class="screen-darken"></span>
+  <!-- End -->
+
+
+
+
+
+  <!-- Header section -->
+  <header class="header" id="header">
+    <div class="container">
+      <!-- Navigation Wrapper -->
+      <div id="header"></div>
+      <!-- End -->
+    </div>
+  </header>
+  <!-- End -->
+
+  <!-- main section -->
+  <main>
+    <!-- Full Width Banner -->
+    <section class="bg-color bg-pos-full gradient-bg01">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 p-5">
+            <div class="cour-detail-box">
+
+            </div>
+            <div class="mb-3 course-other-info">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="mb-4 prd-detail-txt">
+              <h2 id="course-name">Web Design</h2>
+            </div>
+            <div class="tutor-section tutor-prd-detail d-flex align-items-center pb-4 pt-2">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Full Width Banner End -->
+    <!-- Body Section -->
+    <section class="section">
+      <div class="container">
+        <div class="row gx-md-5 gy-4">
+          <!-- Col -->
+          <div class="col-lg-8">
+            <!-- Tab Buttons -->
+            <ul class="nav nav-tabs nav-fill flex-column flex-md-row" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview"
+                  type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum"
+                  type="button" role="tab" aria-controls="curriculum" aria-selected="false">Program Outlines</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#instructor"
+                  type="button" role="tab" aria-controls="instructor" aria-selected="false">Minimum Entry
+                  Requirement</button>
+              </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="myTabContent">
+              <!-- Overview Tab Content -->
+              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                <p id="course-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </p>
+
+
+
+              </div>
+              <!-- Overview Tab Content End -->
+              <!-- Programme Outlines Tab Content -->
+              <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header course-description" id="panelsStayOpen-headingOne">
+
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                      aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body">
+                        <ul class="course_list">
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                              <div class="d-flex justify-content-center align-items-center">
+                                <i class="bi bi-play-circle-fill me-3"></i>
+                                <a href="https://www.youtube.com/watch?v=_I9czy3cMBg&t=100s"
+                                  class="glightbox4">Introduction</a>
+                              </div>
+                              <div class="d-flex">
+                                <a href="https://www.youtube.com/watch?v=_I9czy3cMBg&t=100s" class="glightbox4"><span
+                                    class="badge badge-bg-color font-weight-normal">Preview</span></a>
+                                <span>04:07</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                              <div class="d-flex justify-content-center align-items-center course_item">
+                                <i class="bi bi-play-circle-fill me-3"></i>
+                                <a href="#">Lorem Ipsum is simply dummy text</a>
+                              </div>
+                              <div class="d-flex">
+                                <a href="#"><span class="badge badge-bg-color font-weight-normal">Preview</span></a>
+                                <span>01:37</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                              <div class="d-flex justify-content-center align-items-center course_item">
+                                <i class="bi bi-play-circle-fill me-3"></i>
+                                It is a long established fact that a reader
+                              </div>
+                              <div class="d-flex">
+                                <span><a href="#"><i class="bi bi-lock-fill"></i></a></span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                              <div class="d-flex justify-content-center align-items-center course_item">
+                                <i class="bi bi-play-circle-fill me-3"></i>
+                                <a href="#">Lorem Ipsum is simply dummy text</a>
+                              </div>
+                              <div class="d-flex">
+                                <a href="#"><span class="badge badge-bg-color font-weight-normal">Preview</span></a>
+                                <span>03:43</span>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center course_content-box">
+                              <div class="d-flex justify-content-center align-items-center course_item">
+                                <i class="bi bi-play-circle-fill me-3"></i>
+                                <a href="#">It is a long established fact that a reader</a>
+                              </div>
+                              <div class="d-flex">
+                                <span><a href="#"><i class="bi bi-lock-fill"></i></a></span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- Programme Outline Tab Content End -->
+              <!-- Entry Requirement Tab Content -->
+              <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
+                <div class="instructor-wrap d-md-flex">
+
+                  <div class="instructor-descriptions">
+                    <h5 class="instructor-name">Loading...</h5>
+                    <!-- Requirements will be inserted here dynamically -->
+                  </div>
+                </div>
+              </div>
+              <!-- Entry Requirement Tab Content End -->
+              <!-- Review Tab Content -->
+              <!-- will be handled by script-->
+              <!-- Review Tab Content End -->
+
+
+            </div>
+            <!-- Tab Content End -->
+
+          </div>
+          <!-- Col End -->
+          <!-- Col -->
+          <div class="col-lg-4 pb-4 pb-md-0" style="margin-top:-250px">
+            <!-- Sidebar Wrapper -->
+            <div class="detail-sidebar">
+
+              <!-- Product Info List -->
+              <div class="p-3 p-md-4">
+                <div class="sidebar-info-box">
+                  <ul>
+                    <li><span class="course-price" id="course-fees">$45.00</span> </li>
+
+                    <li style="border-top: solid 1px #ccc;">
+                      <span><i class="bi bi-alarm me-2"></i> Duration: </span>
+                      <span id="course-duration"></span>
+                    </li>
+                    <li>
+                      <span><i class="bi bi-journal-medical me-2"></i> Campuses: </span>
+                      <ul class="branch-list">
+                        <!-- Branches will be inserted here -->
+                      </ul>
+                    </li>
+                    <li>
+                      <span><i class="bi bi-cart me-2"></i> Intake: </span>
+                      <ul class="intake-list"></ul>
+                      <!-- intakes  will be inserted here -->
+                  </ul>
+                  </li>
+
+                  </ul>
+                </div>
+                <!-- Share Button with Social Icons -->
+
+                <a href="contact.html" class="btn btn-primary w-100 py-2">Enroll Now</a>
+
+                <!-- Share Button with Social Icons End -->
+              </div>
+              <!-- Product Info List End -->
+            </div>
+            <!-- Sidebar Wrapper End -->
+          </div>
+          <!-- Col End -->
+        </div>
+      </div>
+    </section>
+    <!-- body mid section -->
+
+
+
+
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+  <script>
+     // Function to load HTML content
+     function loadHTML(elementId, filePath) {
+       fetch(filePath)
+         .then(response => response.text())
+         .then(data => {
+           document.getElementById(elementId).innerHTML = data;
+         })
+         .catch(error => console.error('Error loading HTML:', error));
+     }
+ 
+     // Load header and footer
+     loadHTML('header', 'header.html');
+     loadHTML('footer', 'footer.html');
+   </script>
+
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <!-- function.js -->
+  <script src="assets/js/function.js"></script>
+
+</body>
+
+</html>

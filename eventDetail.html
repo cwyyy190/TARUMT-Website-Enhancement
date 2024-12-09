@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Events </title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader"></div>
+  <!-- Progress circle scroll to top -->
+  <div id="progress">
+    <div id="progress-value">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+  </div>
+<!-- Black Transparent Screen -->
+<span class="screen-darken"></span>
+<!-- End -->
+
+
+
+<!-- Header section --> 
+<header class="header" id="header">
+  <div id="header"></div>
+
+</header>
+<!-- End -->
+
+  <!-- main section -->
+  <main>
+    <!-- Full Width Banner -->
+    <section class="bg-color bg-pos-full gradient-bg01">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 p-5">
+              <div class="mb-3 course-other-info">
+                
+              </div>
+              <div class="mb-4 prd-detail-txt">
+                <h2>Event Title</h2> <!-- Will be dynamically updated -->
+                <p class="event-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> <!-- Dynamic description -->
+              </div>
+              
+              <div class="mb-3 course-other-info">
+                <i class="bi bi-calendar"></i>
+                <span class="event-date"> Event Date</span>
+                <i class="bi bi-geo-alt"></i>
+                <span class="event-location"> Location</span>
+                <i class="bi bi-person-fill"></i>
+                <span class="event-person"> 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Full Width Banner End -->
+<!-- Body Section -->
+<section class="section">
+    <div class="container">
+      <div class="row gx-md-5 gy-4">
+        <!-- Col -->
+        <div class="col-lg-8">
+          <!-- Tab Buttons -->
+          <ul class="nav nav-tabs nav-fill flex-column flex-md-row" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview"
+                type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button  class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register"
+                type="button" role="tab" aria-controls="register" aria-selected="false">Register</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="organizer-tab" data-bs-toggle="tab" data-bs-target="#organizer"
+                type="button" role="tab" aria-controls="organizer" aria-selected="false">Organizer</button>
+            </li>
+            
+          </ul>
+
+          <!-- Tab Content -->
+          <div class="tab-content" id="myTabContent">
+              <!-- Overview Tab Content -->
+              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                <p id="desc2">TechXpo is a large-scale annual event where students from all levels, including undergraduate, postgraduate, and research students,
+                   get the opportunity to present their innovative projects. It covers a wide range of topics, including artificial intelligence, 
+                   software engineering, mobile application development, robotics, and more. The event is open to all departments, though the main focus 
+                   remains on computer science and related technologies.
+
+                  The expo is designed to bridge the gap between academia and industry by inviting industry experts and representatives from tech companies 
+                  to judge the projects, give feedback, and offer potential internships or job placements. The projects are evaluated based on their technical 
+                  complexity, creativity, problem-solving approach, and presentation.
+                </p>
+                
+                  <h3>What you'll learn?</h3>
+                  <ul class="list-style-2 mt-4">
+                    <li><i class="bi bi-check-lg bg-icon"></i> <b id="learnTitle1">Exhibitions: </b> <p id="learnDesc1">Students display their projects, prototypes, and research papers in designated booths.</p></li>
+                    <li><i class="bi bi-check-lg bg-icon"></i> <b id="learnTitle2">Awards:</b> <p id="learnDesc2">A panel of judges, including industry professionals and faculty members, evaluates the projects. </p></li>
+                    <li><i class="bi bi-check-lg bg-icon"></i> <b id="learnTitle3">Networking Opportunities:</b> <p id="learnDesc3">Connect with industry experts, entrepreneurs, and potential investors.</p></li>
+                    <li><i class="bi bi-check-lg bg-icon"></i> <b id="learnTitle4">Workshops Talks:</b> <p id="learnDesc4">Short technical workshops and keynote talks that covering the latest trends in technology and project management.</p></li>
+                   </ul>
+                
+                <p class="mb-md-0">
+                  <b style="font-size: large;">How to Participate:</b><br>
+                  <p id="wayToJoin">
+                    Students can register individually or in teams. Project proposals need to be submitted prior to the event, detailing the concept, methodology, and potential impact of the project. The expo is typically held over two to three days, allowing ample time for project display and interaction.
+                  </p>
+                </p>
+                </div>
+            <!-- Overview Tab Content End -->
+            <!-- Organizer Tab Content -->
+            <div class="tab-pane fade" id="organizer" role="tabpanel" aria-labelledby="organizer-tab">
+              <div class="organizer-wrap d-md-flex">
+                <div class="tutor-section me-md-4">
+                  <div class="tutor-img lg-size-2x mb-4">
+                    <img src="assets/img/course-img-01.jpg" alt="Organizer Image" id="organizer-image">
+                  </div>
+                  <div class="organisation-social-links">
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                   </div>
+                </div>
+                <div class="organizer-descriptions">
+                  <h5 class="organizer-name" id="organizer-name">Organizer Name</h5>
+                  
+                  <p class="mt-3" id="organizer-description">Organizer description goes here.</p>
+                  <a class="mt-3" href="#" id="organizer-email"><i class="bi bi-envelope"></i> Email</a></br>
+                  <a class="mt-3" href="#" id="organizer-phone"><i class="bi bi-phone"></i> Phone</a>
+                
+                </div>
+              </div>
+            </div>
+            <!-- organizer Tab Content End -->
+            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+            <!-- Register Participant Form -->
+            <div class="p-3 p-md-4">
+              <div class="sidebar-info-box">
+                <h4>Register for Event as a Participant</h4>
+             
+
+               
+                <form id="participant-form">
+                  <div class="row mb-6">
+                    <div class="mb-3">
+                          
+                      <label for="first-name" class="form-label">First Name <span class="text_danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                              </svg>
+                           <style type="text/css">
+                             .st0{fill:#000000;}
+                           </style>
+                           <g>
+                             <path class="st0" d="M256,265.308c73.252,0,132.644-59.391,132.644-132.654C388.644,59.412,329.252,0,256,0
+                               c-73.262,0-132.643,59.412-132.643,132.654C123.357,205.917,182.738,265.308,256,265.308z"/>
+                             <path class="st0" d="M425.874,393.104c-5.922-35.474-36-84.509-57.552-107.465c-5.829-6.212-15.948-3.628-19.504-1.427
+                               c-27.04,16.672-58.782,26.399-92.819,26.399c-34.036,0-65.778-9.727-92.818-26.399c-3.555-2.201-13.675-4.785-19.505,1.427
+                               c-21.55,22.956-51.628,71.991-57.551,107.465C71.573,480.444,164.877,512,256,512C347.123,512,440.427,480.444,425.874,393.104z"/>
+                           </g>
+                           </svg></span>
+                     
+
+                            <input type="text" class="form-control" id="first-name" placeholder="Name" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                          
+                      <label for="last-name" class="form-label">Last Name <span class="text_danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                              </svg>
+                           <style type="text/css">
+                             .st0{fill:#000000;}
+                           </style>
+                           <g>
+                             <path class="st0" d="M256,265.308c73.252,0,132.644-59.391,132.644-132.654C388.644,59.412,329.252,0,256,0
+                               c-73.262,0-132.643,59.412-132.643,132.654C123.357,205.917,182.738,265.308,256,265.308z"/>
+                             <path class="st0" d="M425.874,393.104c-5.922-35.474-36-84.509-57.552-107.465c-5.829-6.212-15.948-3.628-19.504-1.427
+                               c-27.04,16.672-58.782,26.399-92.819,26.399c-34.036,0-65.778-9.727-92.818-26.399c-3.555-2.201-13.675-4.785-19.505,1.427
+                               c-21.55,22.956-51.628,71.991-57.551,107.465C71.573,480.444,164.877,512,256,512C347.123,512,440.427,480.444,425.874,393.104z"/>
+                           </g>
+                           </svg></span>
+                     
+                          <input type="text" class="form-control" id="last-name" placeholder="Name" required>
+                        </div>
+                    </div>
+                    
+                  <div class="mb-3">
+                    <label for="studentID" class="form-label">Student ID <span class="text_danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-person-badge" viewBox="0 0 16 16">
+                            <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492z"/>
+                          </svg>
+                          <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <rect x="3" y="5" width="18" height="14" rx="2" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                          </svg></span>
+                        <input type="text" class="form-control" id="studentID" placeholder="Student ID" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email <span class="text_danger">*</span></label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-envelope" viewBox="0 0 16 16">
+                          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                        </svg>
+                        <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                        </svg></span>
+                      <input type="email" class="form-control" id="email" placeholder="Email" required>
+                  </div>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label"> Contact No <span class="text_danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                      </svg>
+                      <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <rect x="3" y="5" width="18" height="14" rx="2" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                      </svg></span>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone" required>
+                </div>
+            </div>
+                  <div class="mb-3">
+                    <label for="facultyStudent" class="form-label">Faculty/Student</label>
+                    <select id="facultyStudent" class="form-control">
+                      <option value="YES">YES</option>
+                      <option value="NO">NO</option>
+                    </select>
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="media" class="form-label">Media</label>
+                    <select id="media" class="form-control">
+                      <option value="Website">Website</option>
+                      <option value="Email">Email</option>
+                      <option value="Friend">Friend</option>
+                    </select>
+
+                  </div>
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+                </form>
+
+ 
+              </div>
+            </div>
+        <!-- Register Form End -->
+            </div>
+          </div>
+          <!-- Tab Content End -->
+          
+        </div>
+        <!-- Col End -->
+        <!-- Col -->
+        <div class="col-lg-4 pb-4 pb-md-0">
+          <!-- Sidebar Wrapper -->
+          <div class="detail-sidebar">
+            <!-- Product Image -->
+            <div class="overflow-hidden img-box bg-overlay">
+                <img src="assets/img/course-img-01.jpg" alt="Event Image" id="event-image">
+                </div>
+              </a>
+            </div>
+            <!-- Product Image End -->
+            <!-- Product Info List -->
+            <div class="p-3 p-md-4">
+              <!-- Additional Event Info -->
+              <div class="p-3 p-md-4">
+                <div class="sidebar-info-box">
+                  <ul>
+                    <li>
+                      <span class="course-price" id="event-price">$45.00</span> 
+                    </li>
+                    <li>
+                      <span><i class="bi bi-journal-medical me-2"></i> Date: </span>
+                      <span id="event-date"></span>
+                    </li>
+                    <li>
+                      <span><i class="bi bi-alarm me-2"></i> Time: </span>
+                      
+                      <span id="event-time"></span>
+                    </li>
+                    <li>
+                      <span><i class="bi bi-person-fill me-2"></i> Organizer: </span>
+                      <span id="event-organizer"></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Additional Event Info End -->
+               <!-- Share Button with Social Icons -->
+              <button class="btn btn-outline2 w-100" data-bs-toggle="tooltip" data-bs-trigger="click" data-bs-html="true" data-bs-custom-class="custom-popover" title=" <a href='#'><i class='bi bi-twitter'></i></a> <a href='#'><i class='bi bi-facebook'></i></a> <a href='#'><i class='bi bi-instagram'></i></a>"> <i class="bi bi-share-fill me-2"></i> Share This Course </button>
+              <!-- Share Button with Social Icons End -->
+            </div>
+            <!-- Product Info List End -->
+          </div>
+          <!-- Sidebar Wrapper End -->
+        </div>
+        <!-- Col End -->
+      </div>
+    </div>
+  </section>
+<!-- body mid section -->
+<!-- Related courses -->
+<section class="section pt-0">
+    <div class="container">
+      <div class="section-heading-txt">
+        <h3 class="text-start">More Event for You</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper mb-5">
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+
+  <!-- Footer End -->
+  <script>
+    // Function to load HTML content
+    function loadHTML(elementId, filePath) {
+      fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+    }
+
+    // Load header and footer
+    loadHTML('header', 'header.html');
+    loadHTML('footer', 'footer.html');
+  </script>
+
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <!-- function.js -->
+  <script src="assets/js/function.js"></script>
+  <script>
+  // Function to fetch query parameter
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Get the eventID from the URL
+  const eventID = getQueryParam('eventID');
+
+  if (eventID) {
+    // Fetch event details from the server
+    fetch(`http://localhost:8080/event/${eventID}`)
+      .then(response => response.json())
+      .then(data => {
+        // Populate event fields with event data
+        document.querySelector('h2').innerText = data.event_name || 'Event Name';
+        document.querySelector('p.event-description').innerText = data.desc1 || 'Event description';
+        document.querySelector('.event-date').innerText = new Date(data.event_date).toLocaleDateString() || 'Date not available';
+        document.querySelector('.event-location').innerText = data.location || 'Location not available';
+        document.getElementById('event-date').innerText =  new Date(data.event_date).toLocaleDateString() || 'Date not available';
+        document.getElementById('event-time').innerText = data.event_time || 'Time not available';
+        document.getElementById('event-price').innerText = 'RM' + data.price || 'FREE';
+        document.getElementById('event-image').src = data.eventIMG_url || 'assets/img/default-event.jpg'; // Default image if not found
+        document.getElementById('desc2').innerText = data.desc2 || 'Error';
+        document.getElementById('learnTitle1').innerText = data.learnTitle1 || 'Error';
+        document.getElementById('learnTitle2').innerText = data.learnTitle2 || 'Error';
+        document.getElementById('learnTitle3').innerText = data.learnTitle3 || 'Error';
+        document.getElementById('learnTitle4').innerText = data.learnTitle4 || 'Error';
+        document.getElementById('learnDesc1').innerText = data.learnDesc1 || 'Error';
+        document.getElementById('learnDesc2').innerText = data.learnDesc2 || 'Error';
+        document.getElementById('learnDesc3').innerText = data.learnDesc3 || 'Error';
+        document.getElementById('learnDesc4').innerText = data.learnDesc4 || 'Error';
+        document.getElementById('wayToJoin').innerText = data.wayToJoin || 'Error';
+
+        // Fetch the number of participants for the event
+        fetch(`http://localhost:8080/event/participants/${eventID}`)
+          .then(response => response.json())
+          .then(data => {
+            // Update the number of participants in the UI
+            document.querySelector('.event-person').innerText = data.participantCount || 0;
+          })
+          .catch(error => {
+            console.error('Error fetching participant count:', error);
+            document.querySelector('.event-person').innerText = 'Error retrieving participant count';
+          });
+
+        // Fetch organizer details
+        fetch(`http://localhost:8080/organizer/${data.organizer_id}`)
+          .then(response => response.json())
+          .then(organizerData => {
+            // Populate organizer fields
+            document.getElementById('event-organizer').innerText = organizerData.organizer_name || 'Organizer Name';
+            document.getElementById('organizer-name').innerText = organizerData.organizer_name || 'Organizer Name';
+            document.getElementById('organizer-description').innerText = organizerData.description || 'Description not available';
+            document.getElementById('organizer-email').innerText = organizerData.email || 'Email not available';
+            document.getElementById('organizer-phone').innerText = organizerData.phone || 'Phone not available';
+            document.getElementById('organizer-image').src = organizerData.orgIMG_url || 'assets/img/default-organizer.jpg'; // Default image
+
+            // Fetch related events by the same organizer
+            fetch(`http://localhost:8080/events/related/${data.organizer_id}`)
+              .then(response => response.json())
+              .then(relatedEvents => {
+                // Filter out the current event from related events
+                const filteredEvents = relatedEvents.filter(event => event.event_id !== eventID);
+
+                // If there are no related events, hide the related events section
+                if (filteredEvents.length === 0) {
+                  document.querySelector('.section.pt-0').style.display = 'none';
+                } else {
+                  const swiperWrapper = document.querySelector('.swiper-wrapper');
+                  swiperWrapper.innerHTML = ''; // Clear existing slides
+
+                  filteredEvents.forEach(event => {
+                    const slide = `
+                      <div class="swiper-slide">
+                        <div class="courses card rounded overflow-hidden">
+                          <!-- Item Image -->
+                          <div class="img-box">
+                            <a href="eventDetail.html?eventID=${event.event_id}">
+                              <img src="${event.eventIMG_url || 'assets/img/default-event.jpg'}" alt="${event.event_name}" class="img-fluid">
+                            </a>
+                          </div>
+                          <!-- End -->
+                          <div class="p-4 card-body">
+                            <!-- Item Body Content -->
+                            <h3><a href="eventDetail.html?eventID=${event.event_id}">${event.event_name}</a></h3>
+                            <p class="card-text">${event.description}</p>
+                            <p><i class="bi bi-calendar"></i> ${new Date(event.event_date).toLocaleDateString()}</p>
+                            <p><i class="bi bi-geo-alt"></i> ${event.location}</p>
+                          </div>
+                          <!-- End -->
+                          <!-- Item Footer -->
+                          <div class="price__group">
+                            <div class="price-box"><span>RM${event.price || 'Free'}</span> </div>
+                            <a href="eventDetail.html?eventID=${event.event_id}" class="btn btn__read-more"> Know Details <i class="bi bi-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                    swiperWrapper.innerHTML += slide;
+                  });
+
+                  // Initialize the swiper (if needed)
+                  new Swiper('.mySwiper', {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    pagination: {
+                      el: '.swiper-pagination',
+                      clickable: true,
+                    },
+                  });
+                }
+              })
+              .catch(error => {
+                console.error('Error fetching related events:', error);
+                document.querySelector('.section.pt-0').style.display = 'none'; // Hide if error occurs
+              });
+          })
+          .catch(error => console.error('Error fetching organizer details:', error));
+      })
+      .catch(error => console.error('Error fetching event details:', error));
+  } else {
+    console.log('No event ID found in URL.');
+  }
+   // Handle participant registration form submission
+  document.getElementById('participant-form').addEventListener('submit', function (e) {
+   e.preventDefault();
+
+    const formData = {
+      first_name: document.getElementById('first-name').value,
+      last_name: document.getElementById('last-name').value,
+      studentID: document.getElementById('studentID').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      facultyStudent: document.getElementById('facultyStudent').value,
+      media: document.getElementById('media').value,
+      event_id: eventID // Ensure this is passed from the event detail
+    };
+    alert('You have successfully registered as a participant!');
+  //   fetch('http://localhost:8080/register-participant', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(formData)
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+        
+  //     })
+  //     .catch(error => {
+  //       alert('Error registering participant: ' + error.message);
+  //     console.error('Error details:', error);
+  //     });
+   });
+</script>
+
+
+
+
+</body>
+
+</html>

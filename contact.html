@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Qualification </title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script>
+    // Function to load HTML content
+    function loadHTML(elementId, filePath) {
+      fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+    }
+  
+    // Load header and footer
+    loadHTML('header', 'header.html');
+    loadHTML('footer', 'footer.html');
+  </script>
+
+  <!-- Send email -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "cFT5uIFd6PxzEy44g",
+      });
+    })();
+  </script>
+
+  <script>
+    // TO fetch education level from the programme at the education level dropdown
+    fetch('http://localhost:8080/programmeLevels')
+      .then(response => response.json())
+      .then(data => {
+        const educationLevelDropdown = document.getElementById('educationLevelDropdown');
+        data.forEach(level => {
+          const option = document.createElement('option');
+          option.value = level.level; // Adjust based on how your response returns the values
+          option.text = level.level;
+          educationLevelDropdown.appendChild(option);
+        });
+
+      })
+      .catch(error => console.error('Error fetching education levels:', error));
+
+    // TO fetch programmes from the programme at the programmes dropdown
+    fetch('http://localhost:8080/programmes')
+      .then(response => response.json())
+      .then(data => {
+        // Display all data without filter
+        const programmeDropdown = document.getElementById('programmeDropdown');
+        data.forEach(programme => {
+          const option = document.createElement('option');
+          option.value = programme.name;
+          option.text = programme.name;
+          programmeDropdown.appendChild(option);
+        });
+
+        // Add event listener for education level dropdown
+        document.addEventListener('DOMContentLoaded', function () {
+          const educationLevelDropdown = document.getElementById('educationLevelDropdown');
+
+          educationLevelDropdown.addEventListener('change', function () {
+            // Clear previous programme dropdown options
+            programmeDropdown.innerHTML = '';
+
+            const defaultOption = document.createElement('option');
+            defaultOption.text = 'Programme';
+            defaultOption.value = '';
+            defaultOption.hidden = true;    // Hides the option once selected
+
+            programmeDropdown.appendChild(defaultOption);
+
+            const selectedValue = educationLevelDropdown.value;
+
+            // Filter and append new programme options based on selected education level
+            data.forEach(programme => {
+              if (selectedValue === programme.level || selectedValue === "") {
+                const option = document.createElement('option');
+                option.value = programme.id;
+                option.textContent = programme.name;
+
+                programmeDropdown.appendChild(option);
+              }
+            });
+          });
+        });
+      })
+      .catch(error => console.error('Error fetching programmes:', error));
+
+    // TO fetch campus data from the backend at the campus dropdown
+    fetch('http://localhost:8080/branch')
+      .then(response => response.json())
+      .then(data => {
+        const campusDropdown = document.getElementById('campusDropdown');
+        data.forEach(campus => {
+          const option = document.createElement('option');
+          option.value = campus.name; //
+          option.text = campus.name;
+          campusDropdown.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching campus:', error));
+
+    // TO fetch campus data from the backend at the intake dropdown
+    fetch('http://localhost:8080/intakeMonth')
+      .then(response => response.json())
+      .then(data => {
+        const intakeDropdown = document.getElementById('intakeDropdown');
+        data.forEach(intake => {
+          const option = document.createElement('option');
+          option.value = intake.month;
+          option.text = intake.month;
+          intakeDropdown.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching intake month:', error));
+
+
+    //Load dynamic content of entry requirement 
+    // Get the dropdown and the content div
+    document.addEventListener("DOMContentLoaded", function () {
+      const entryDropdown = document.getElementById('entryDropdown');
+      const qualificationContent = document.getElementById('qualificationContent');
+
+      // Function to update content based on selected qualification
+      const updateQualificationContent = (value) => {
+
+        let content = '';
+        switch (value) {
+          case 'spm':
+            const subjectsSPM = [
+              "Bahasa Melayu",
+              "Bahasa English",
+              "History",
+              "Mathematics",
+              "Science",
+              "Moral",
+              "Chemistry",
+              "Physics",
+              "Biology",
+              "Additional Mathematics",
+              "Accounting",
+              "Business",
+            ];
+
+            const gradesSPM = ["A+", "A", "A-", "B+", "B", "C+", "C", "D", "F", "N/A"];
+
+            content = `<div><label><strong>SPM Subjects:</strong></label>`;
+
+            subjectsSPM.forEach(subject => {
+              content += `
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 20%"><p>${subject}</p></div>
+              <div style="flex: 80%"><select class="form-select mb-2" style="padding: 10px 32px 10px 16px"> ${gradesSPM.map(grade => `<option>${grade}</option>`).join('')}</select></div>
+            </div>`;
+            });
+            content += `</div>`;
+            break;
+          case 'stpm':
+            const subjectsSTPM = [
+              "General Studies",
+              "Mathematics T",
+              "Chemistry",
+              "Physics",
+            ];
+
+            const gradesSTPM = ["A+", "A", "A-", "B+", "B", "C+", "C", "D", "F", "N/A"];
+
+            content = `<div><label><strong>STPM Subjects:</strong></label>`;
+
+            subjectsSTPM.forEach(subject => {
+              content += `
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 20%"><p style="margin-top: 6px;">${subject}</p></div>
+              <div style="flex: 80%"><select class="form-select mb-2" style="padding: 10px 32px 10px 16px"> ${gradesSTPM.map(grade => `<option>${grade}</option>`).join('')}</select></div>
+            </div>`;
+            });
+            content += `</div>`;
+            break;
+          case 'foundation':
+            content += `
+          <div><label><strong>Foundation Result:</strong></label>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 20%"><p style="margin-top: 6px;">CGPA</p></div>
+              <div style="flex: 80%"><input type="text" class="form-control form-control-shadow" id="foundation"
+                      placeholder="Your CGPA" style="padding: 10px 32px 10px 16px">
+                    </div>
+            </div>
+            
+             <div class="col-md-6">
+                  <div class="form-floating mb-4">
+            
+            
+            `;
+            break;
+          case 'diploma':
+            content += `
+          <div><label><strong>Diploma Result:</strong></label>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="flex: 20%"><p style="margin-top: 6px;">CGPA</p></div>
+              <div style="flex: 80%"><input type="text" class="form-control form-control-shadow" id="diploma"
+                      placeholder="Your CGPA" style="padding: 10px 32px 10px 16px">
+                    </div>
+            </div>`;
+            break;
+          default:
+            console.log("blank");
+            content = '';
+        }
+        qualificationContent.innerHTML = content;
+      };
+
+      // Event listener to detect dropdown changes
+      entryDropdown.addEventListener('change', function () {
+        updateQualificationContent(this.value);
+      });
+    });
+
+
+    // Event listener for check qualification button
+    let isQualified = false;
+    let isChecked = false;
+    document.addEventListener("DOMContentLoaded", function () {
+      // Define qualifying grades (C or above)
+      const qualifyingGrades = ["A+", "A", "A-", "B+", "B", "C+", "C"];
+
+      document.getElementById("checkQualificationBtn").addEventListener("click", function () {
+        const academicLevel = document.getElementById("entryDropdown").value;
+        let stpmCredits = 0;
+        let spmCredits = 0;
+        isChecked = true;
+
+        // Get all select elements for STPM subjects
+        const gradeSelects = document.querySelectorAll(".form-select");
+
+        switch (academicLevel) {
+          case 'spm':
+            gradeSelects.forEach(select => {
+              const selectedGrade = select.value;
+              // Check if the selected grade is in the qualifying grades list
+              if (qualifyingGrades.includes(selectedGrade)) {
+                spmCredits += 1; // Increment credit count
+              }
+            });
+            isQualified = spmCredits >= 5;
+            break;
+          case 'stpm':
+            gradeSelects.forEach(select => {
+              const selectedGrade = select.value;
+              // Check if the selected grade is in the qualifying grades list
+              if (qualifyingGrades.includes(selectedGrade)) {
+                stpmCredits += 1; // Increment credit count
+              }
+            });
+            isQualified = stpmCredits >= 3;
+            break;
+          case 'foundation':
+            const foundationCGPA = document.getElementById("foundation").value;
+            isQualified = foundationCGPA >= 2.5;
+            break;
+          case 'diploma':
+            const diplomaCGPA = document.getElementById("diploma").value;
+            isQualified = diplomaCGPA >= 2.5;
+            break;
+          default:
+            alert("Please select a valid academic qualification level.");
+            return;
+        }
+
+        if (isQualified) {
+          alert("Congratulations, you meet the qualification requirements!");
+        } else {
+          alert("Unfortunately, you do not meet the qualification requirements.");
+        }
+      });
+    });
+
+    //Event listener for enroll now button
+    document.addEventListener("DOMContentLoaded", function () {
+
+      document.getElementById("enrollBtn").addEventListener("click", function () {
+        if (isChecked) {
+          if (isQualified) {
+            sendEmail();
+          } else {
+            alert("Your enroll request is declined. ");
+          }
+        } else {
+          alert("Please check your qualification before submitting.");
+        }
+
+
+      });
+
+      function sendEmail() {
+
+        // TO fetch programme detail based on id
+        const courseId = document.getElementById("programmeDropdown").value;
+        fetch(`http://localhost:8080/programmes/${courseId}`)
+          .then(response => response.json())
+          .then(data => {
+            let params = {
+              recipient_name: document.getElementById("name").value,
+              recipient_email: document.getElementById("email").value,
+              programme_name: data.name,
+              programme_level: data.level,
+              programme_duration: data.duration,
+              programme_intake_month: document.getElementById("campusDropdown").value,
+              programme_campus: document.getElementById("intakeDropdown").value,
+              programme_fee: data.fees
+            }
+
+            emailjs.send("service_i4d4yry", "template_92xfgsd", params).then(function (res) {
+              alert("You have successfully submitted your enroll request.")
+            })
+
+
+          })
+          .catch(error => console.error('Error fetching education levels:', error));
+
+
+
+
+
+      }
+
+    });
+
+
+  </script>
+
+
+
+</head>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader"></div>
+  <!-- Progress circle scroll to top -->
+  <div id="progress">
+    <div id="progress-value">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+  </div>
+
+  <!-- Black Transparent Screen -->
+  <span class="screen-darken"></span>
+  <!-- End -->
+
+  <!-- Header section -->
+ 
+  <div id="header"></div>
+  <!-- End -->
+
+  <!-- main section -->
+  <main>
+    <!-- Full Width Banner -->
+    <section class="bg-color bg-pos-full bg-3">
+      <div class="container py-5">
+        <div class="row py-5">
+          <div class="col-md-6 login_big-text d-flex flex-column justify-content-center">
+            <h2 class="display-6">Check Qualification</h2>
+            <p class="text-white">Interested in any courses? Check your verification and enroll now!</p>
+          </div>
+          <div class="col-md-6 text-center">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Full Width Banner End -->
+    <!-- Body Section -->
+    <section class="section pb-0">
+      <div class="container">
+        <!--Personal Information-->
+        <div class="row g-4">
+
+          <div class="col-lg-12 text-styling">
+            <!-- Heading -->
+            <div class="text-center">
+              <h5 style="text-align: left;">Personal Information</h5>
+            </div>
+            <!-- Heading End -->
+            <!-- Form -->
+            <form action="#">
+
+              <div class="row gx-4 formstyle mb-5">
+                <!-- Name -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" name="name" class="form-control form-control-shadow" id="name" placeholder="Name"
+                      required>
+                    <label for="name">Name</label>
+                  </div>
+                </div>
+                <!-- DOB -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="dd/mm/yyyy"
+                      name="dob" class="form-control form-control-shadow" id="dob" required>
+                    <label for="phone_number">Date of birth</label>
+                  </div>
+                </div>
+                <!-- Email Address -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" name="email" class="form-control form-control-shadow" id="email"
+                      placeholder="Email Address" required>
+                    <label for="email">Email Address</label>
+                  </div>
+                </div>
+                <!-- Phone Number -->
+                <div class="col-md-4">
+                  <div class="form-floating mb-4">
+                    <input type="text" name="phonenum" class="form-control form-control-shadow" id="phone number"
+                      placeholder="Phone Number" required>
+                    <label for="phone_number">Phone Number</label>
+                  </div>
+                </div>
+                <!-- Gender -->
+                <div class="col-md-2">
+                  <div class="form-floating mb-4">
+                    <select class="form-select form-control-shadow" aria-label="Default select example">
+                      <option selected>Gender</option>
+                      <option value="1">Female</option>
+                      <option value="2">Male</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Education Level -->
+                <!-- <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <select class="form-select form-control-shadow" aria-label="Default select example">
+                      <option selected>Education Level</option>
+                      <option value="1">Foundation</option>
+                      <option value="2">Diploma</option>
+                      <option value="3">Degree</option>
+                      <option value="3">Postgraduate</option>
+                    </select>
+                  </div>
+                </div> -->
+                <!-- Address -->
+                <div class="col-md-4">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-shadow" id="address3"
+                      placeholder="Address Line 1">
+                    <label for="address1" class="form-label">Address Line 1</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-shadow" id="address3"
+                      placeholder="Address Line 2">
+                    <label for="address2" class="form-label">Address Line 2</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-shadow" id="address3"
+                      placeholder="Address Line 3">
+                    <label for="address3" class="form-label">Address Line 3</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-shadow" id="postcode" placeholder="Postcode">
+                    <label for="postcode" class="form-label">Post Code</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-shadow" id="city" placeholder="City">
+                    <label for="postcode" class="form-label">City</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating mb-4">
+                    <select class="form-select form-control-shadow" aria-label="Default select example">
+                      <option selected>States</option>
+                      <option value="Johor">Johor</option>
+                      <option value="Kedah">Kedah</option>
+                      <option value="Kelantan">Kelantan</option>
+                      <option value="Melaka">Melaka</option>
+                      <option value="Negeri Sembilan">Negeri Sembilan</option>
+                      <option value="Pahang">Pahang</option>
+                      <option value="Perak">Perak</option>
+                      <option value="Perlis">Perlis</option>
+                      <option value="Penang">Penang</option>
+                      <option value="Sabah">Sabah</option>
+                      <option value="Sarawak">Sarawak</option>
+                      <option value="Selangor">Selangor</option>
+                      <option value="Terengganu">Terengganu</option>
+                      <option value="Kuala Lumpur">Kuala Lumpur</option>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating mb-4">
+                    <select class="form-select form-control-shadow" aria-label="Default select example">
+                      <option selected>Country</option>
+                      <option value="1">Malaysia</option>
+                      <option value="2">Singapore</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- Form End -->
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-12 text-styling">
+            <!-- Heading -->
+            <div class="text-center">
+              <h5 style="text-align: left;">Intake & Programme</h5>
+            </div>
+            <!-- Heading End -->
+            <!-- Form -->
+            <form action="#">
+
+              <div class="row gx-4 formstyle mb-5">
+                <!-- Education Level Dropdown -->
+                <div class="col-md-2">
+                  <div class="form-floating mb-4">
+                    <select id="educationLevelDropdown" class="form-select form-control-shadow"
+                      aria-label="Education Level">
+                      <option value="" disabled selected hidden>Education Level</option>
+                    </select>
+
+                  </div>
+                </div>
+                <!-- Programme -->
+                <div class="col-md-6">
+                  <div class="form-floating mb-4">
+                    <select id="programmeDropdown" class="form-select form-control-shadow" aria-label="Programme">
+                      <option value="" disabled selected hidden> Programme</option>
+                      <!-- load dynamically here-->
+                    </select>
+                  </div>
+                </div>
+                <!-- Campus -->
+                <div class="col-md-2">
+                  <div class="form-floating mb-4">
+                    <select id="campusDropdown" class="form-select form-control-shadow" aria-label="Campus">
+                      <!-- load dynamically here-->
+                      <option value="" disabled selected hidden> Campus</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Intake -->
+                <div class="col-md-2">
+                  <div class="form-floating mb-4">
+                    <select id="intakeDropdown" class="form-select form-control-shadow" aria-label="Intake">
+                      <!-- load dynamically here-->
+                      <option value="" disabled selected hidden> Intake Month</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- Form End -->
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-12 text-styling">
+            <!-- Heading -->
+            <div class="text-center">
+              <h5 style="text-align: left;">Entry Qualification</h5>
+            </div>
+            <!-- Heading End -->
+            <!-- Form -->
+            <form action="#">
+
+              <div class="row gx-4 formstyle mb-5">
+
+                <!-- Academic Qualification -->
+                <div class="col-md-12">
+                  <div class="form-floating mb-4">
+                    <select id="entryDropdown" class="form-select form-control-shadow"
+                      aria-label="Academic Qualification">
+                      <option value="" disabled selected hidden> Academic Qualification</option>
+                      <option value="spm">SPM</option>
+                      <option value="stpm">STPM</option>
+                      <option value="foundation">Foundation</option>
+                      <option value="diploma">Diploma</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Content that will change dynamically -->
+                <div id="qualificationContent">
+                  <!-- Dynamically change based on dropdown selection -->
+                </div>
+
+                <div class="row gx-4 formstyle mb-5" style="margin-top: 30px">
+                  <!-- Check Qualification Button -->
+                  <div class="col-6 text-center">
+                    <input id="checkQualificationBtn" type="button" class="btn btn-primary btn-size btn-mt"
+                      value="Check Qualification">
+                  </div>
+
+
+                  <!-- Enroll Button -->
+                  <div class="col-6 text-center">
+                    <input id="enrollBtn" type="button" class="btn btn-primary btn-size btn-mt" value="Enroll Now">
+                  </div>
+                </div>
+
+
+              </div>
+            </form>
+            <!-- Form End -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body Section End -->
+
+    <!-- Google map -->
+    <section class="section pb-0 pt-2">
+      <div class="container-fluid px-0">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Map -->
+            <div class="map map-full rounded-start rounded-lg-start">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d127473.21040385662!2d101.64415513209468!3d3.2152518817955396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x31cc3843bfb6a031%3A0x2dc5e067aae3ab84!2sGround%20Floor%2C%20Bangunan%20Tan%20Sri%20Khaw%20Kai%20Boh%2C%20Jalan%20Genting%20Kelang%2C%20Setapak%2C%2053300%20Kuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!3m2!1d3.2152551999999996!2d101.7265571!5e0!3m2!1szh-CN!2smy!4v1694332869561!5m2!1szh-CN!2smy&hl=en"
+                style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!-- Map End -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+
+  <!-- Footer End -->
+
+  <script>
+    // Function to load HTML content
+    function loadHTML(elementId, filePath) {
+      fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+    }
+
+    // Load header and footer
+    loadHTML('header', 'header.html');
+    loadHTML('footer', 'footer.html');
+  </script>
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <!-- function.js -->
+  <script src="assets/js/function.js"></script>
+
+</body>
+
+</html>

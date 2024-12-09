@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Include FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+
+  <style>
+    .filter-buttons {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-buttons li {
+      display: block;
+    }
+
+    .filter-buttons button {
+      width: 70%;
+      padding: 0px 20px;
+      margin: 0;
+      border: none;
+      background-color: transparent;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      text-align: left;
+    }
+
+    .filter-buttons button:hover {
+      background-color: transparent;
+      color: salmon;
+    }
+
+    /* calander css */
+    /* Hide both calendars by default */
+
+    .fc .fc-daygrid-day {
+      padding: 0 !important;
+      /* Remove padding */
+      height: 50px !important;
+      /* Adjust the height for each day cell */
+      border: none;
+      /* Remove border */
+    }
+
+    .fc .fc-button {
+      border: none;
+      /* Remove border */
+      color: white;
+      /* White text */
+      padding: 5px 10px;
+      /* Add padding */
+      border-radius: 4px;
+      /* Rounded corners */
+    }
+
+    #calendar,
+    #weekly-calendar {
+      max-width: 100%;
+      margin: 20px auto;
+      display: none;
+      /* Initially hidden */
+      min-height: 20px;
+    }
+
+    .fc .fc-daygrid-day-number {
+      color: rgb(0, 0, 0);/
+    }
+
+    .fc-col-header-cell {
+      color: black !important;
+    }
+
+    .fc .fc-daygrid-day {
+      color: black;
+    }
+
+    /* Ensure the day names in the calendar header are black */
+    .fc .fc-col-header-cell-cushion {
+      color: black !important;
+    }
+
+    .fc .fc-daygrid-day:hover {
+      background-color: rgba(89, 95, 33, 0.171);
+      color: white;
+      /* Change font color for selected day */
+    }
+
+    .fc .fc-daygrid-day.selected {
+      background-color: lightblue !important;
+      /* Highlight color */
+    }
+
+    /* Compact event display */
+    .fc-event {
+      font-size: 12px;
+      /* Make event text smaller */
+      padding: 2px 5px;
+    }
+
+    .fc-event-title {
+      white-space: nowrap;
+      /* Prevent event titles from wrapping */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* Add ellipsis for long event titles */
+    }
+
+    .fc-event-dot {
+      width: 8px;
+      height: 8px;
+      background-color: salmon;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .fc-view-harness fc-view-harness-active {
+      height: 150px
+    }
+
+    /* Reduce the height of the weekly calendar */
+    #weekly-calendar .fc-scroller {
+      max-height: 150px;
+      /* Adjust this value to make the calendar more compact */
+      overflow-y: hidden;
+      /* Hide vertical overflow */
+    }
+
+    .fc-daygrid-day {
+      padding: 0 !important;
+      /* Remove padding */
+      height: 50px !important;
+      /* Adjust the height for each day cell */
+    }
+
+    /* Adjust the height of the weekly view */
+    .fc-dayGridWeek-view {
+      min-height: 20px;
+      /* Set minimum height */
+      max-height: 150px;
+      /* Set maximum height for the weekly view */
+    }
+
+    /* Style for days without events */
+    .fc-day-no-event {
+      background-color: #f0f0f0;
+      /* Light grey background for days without events */
+    }
+
+    /* Style the search box */
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding-right: 40px;
+      /* Space for the buttons */
+    }
+
+
+    .search-box #search-button {
+      position: absolute;
+      right: 10px;
+      /* Position the search button */
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader"></div>
+  <!-- Progress circle scroll to top -->
+  <div id="progress">
+    <div id="progress-value">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+  </div>
+
+  <!-- Black Transparent Screen -->
+  <span class="screen-darken"></span>
+  <!-- End -->
+
+  <div>
+    <!-- Navigation Wrapper -->
+    <div id="header"></div>
+    <!-- End -->
+  </div>
+
+  <!-- main section -->
+  <main>
+    <!-- Full Width Banner -->
+    <section class="bg-color bg-pos-full bg-3">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-md-6 login_big-text p-5 d-flex flex-column justify-content-center align-items-start">
+            <h2 class="display-6">Events</h2>
+            <nav aria-label="breadcrumb" class="page__header-navigation d-inline-block">
+              <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Events</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-md-6 text-center">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Full Width Banner End -->
+
+    <!-- Body Section -->
+
+    <section class="section">
+
+      <div class="container ">
+        <div class="row gy-4 gx-lg-4 gx-xl-5">
+          <!-- Col -->
+          <div class="col-12 col-lg-8 px-lg-5">
+            <!-- Calendar Container -->
+            <div id='calendar'></div>
+            <div id="weekly-calendar"></div>
+
+            <!-- event-content               -->
+
+            <div class="row g-4 blog-container">
+            </div>
+            <!-- end of event content -->
+            <!-- Pagination -->
+            <div class="text-center">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="pagination-container">
+                  <!-- Pagination buttons will be dynamically added here -->
+                </ul>
+              </nav>
+            </div>
+
+            <!-- Pagination End -->
+          </div>
+          <!-- Col End -->
+          <!-- Col -->
+          <div class="col-12 col-lg-4">
+            <!-- Blog sidebar -->
+            <div class="widget-sidebar">
+              <!-- Search Blog -->
+
+              <div class="blog__post-wrapper card p-3 mb-4">
+
+                <form action="">
+                  <div class="formstyle">
+                    <div class="search-box">
+                      <input type="search" id="search-input" class="form-control" placeholder="Search">
+                      <button id="search-button" class="btn"> <i class=""></i> </button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+              </form>
+            </div>
+            <!-- Archive widget -->
+            <div class="widget-sidebar card p-3">
+              <h3 class="widget-heading">Filter</h3>
+              <div class="blog-sidebar-links bullets">
+                <ul class=" ps-3 filter-buttons">
+
+                  <li><button id="show-weekly-calendar-btn" onclick="filterEventPosts('weekly')">Weekly</button></li>
+                  <li><button id="show-calendar-btn" onclick="filterEventPosts('monthly')">Monthly</button></li>
+                  <li><button onclick="filterEventPosts('list')">List View</button></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Archive widget End -->
+
+            <!-- Recent Posts widget -->
+            <div class="blog__post-wrapper card p-3 mb-4">
+              <h3 class="mb-3">Recent Post</h3>
+              <ul class="recent-posts">
+              </ul>
+            </div>
+            <!-- Recent Posts widget End -->
+            <!-- Categories widget -->
+            <div class="widget-sidebar card p-3 mb-4">
+              <h3 class="widget-heading">Categories</h3>
+              <div class="blog-sidebar-links bullets">
+                <ul class="ps-3 categories">
+
+                </ul>
+              </div>
+            </div>
+            <!-- Categories widget End -->
+            
+          </div>
+          <!-- Blog sidebar End -->
+        </div><!-- Col End -->
+      </div>
+      </div>
+    </section>
+    <!-- Body Section End -->
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+  <!-- Footer End -->
+  <script>
+    // Function to load HTML content
+    function loadHTML(elementId, filePath) {
+      fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+    }
+
+    // Load header and footer
+    loadHTML('header', 'header.html');
+    loadHTML('footer', 'footer.html');
+  </script>
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- function.js -->
+  <script src="assets/js/function.js"></script>
+
+  <!-- Include FullCalendar JS -->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchCategories(); // Fetch categories from the server
+        fetchEvents(); // Fetch events
+    });
+
+    // Fetch categories from the server
+    function fetchCategories() {
+      fetch('http://localhost:8080/categories')
+          .then(response => response.json())
+          .then(categories => {
+              const categoriesContainer = document.querySelector('.categories');
+              categoriesContainer.innerHTML = `
+                  <li><a href="#" onclick="filterByCategory('all')">All Categories</a></li>
+              ` + categories.map(category => `
+                  <li><a href="#" onclick="filterByCategory('${category.category}')">${category.category}</a></li>
+              `).join('');
+          })
+          .catch(error => console.error('Error fetching categories:', error));
+    }
+    // Function to fetch and filter events by category
+    function filterByCategory(category) {
+      let url = 'http://localhost:8080/events';
+      
+      // If the selected category is not "all", filter events by category
+      if (category !== 'all') {
+          url = `http://localhost:8080/events/category?category=${category}`;
+      }
+
+        fetch(url)
+            .then(response => response.json())
+            .then(events => {
+                // Use the existing logic to display filtered events
+                eventPosts = events.map(event => ({
+                    eventID: event.event_id,
+                    title: event.event_name,
+                    date: event.event_date,
+                    author: event.organizer_name,
+                    imgSrc: event.eventIMG_url,
+                    link: `eventDetail.html?eventID=${event.event_id}`,
+                    content: event.desc1,
+                    category: event.category
+                }));
+                showEventPosts(eventPosts); // Show the filtered events
+            })
+            .catch(error => console.error('Error fetching events:', error));
+      }
+</script>
+
+  <script>
+      const postsPerPage = 3;
+    let currentPage = 1;
+    let eventPosts = [];
+
+    function fetchEvents() {
+      $.ajax({
+          url: 'http://localhost:8080/events', // Ensure this URL is correct for your server
+          method: 'GET',
+          success: function (data) {
+              // Map the event data, ensuring eventID is included
+              eventPosts = data.map(event => ({
+                  eventID: event.event_id,  // Ensure eventID is mapped
+                  title: event.event_name,
+                  date: event.event_date,
+                  author: event.organizer_name,  // Assuming you will join this with organizer's name
+                  imgSrc: event.eventIMG_url, // URL for event image
+                  link: `eventDetail.html?eventID=${event.event_id}`, // Correct eventID in link
+                  content: event.desc1,
+                  category: event.category
+              }));
+              filterEventPosts('list'); // Show events in the list view
+              generateRecentPosts(); // Generate the recent posts
+          },
+          error: function (error) {
+              console.error('Error fetching events:', error);
+          }
+      });
+    }
+
+    // Data for filter
+    const filter = [
+      { label: "List", filter: "list" },
+      { label: "Weekly", filter: "weekly" },
+      { label: "Monthly", filter: "monthly" }
+    ];
+
+
+    // Function to display event posts
+    function showEventPosts(filteredPosts) {
+    const eventList = document.querySelector('.blog-container');
+    eventList.innerHTML = '';
+
+    const totalPosts = filteredPosts.length;
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+    currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = Math.min(startIndex + postsPerPage, totalPosts);
+    const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+
+    if (postsToDisplay.length === 0) {
+        eventList.innerHTML = '<p>No events found matching the criteria.</p>';
+        return;
+    }
+
+    postsToDisplay.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'col-md-12';
+        const formattedDate = new Date(post.date).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+console.log(post);
+        postDiv.innerHTML = `
+            <div class="blog-box shadow">
+                <figure class="card-img-top position-relative overlay">
+                    <img src="${post.imgSrc}" alt="${post.title}">
+                </figure>
+                <div class="card-body">
+                    <div class="blog-header mb-2">
+                        <h3><a href="eventDetail.html?eventID=${post.eventID}">${post.title}</a></h3>
+                    </div>
+                    <div class="blog-meta-wrapper p-0 border-0">
+                        <ul class="d-flex">
+                            <li class="post-author d-flex">
+                                <i class="fa-solid fa-user"></i>
+                                <span>By</span>
+                                <span><a href="#">${post.author}</a></span>
+                            </li>
+                            <li class="post-comment me-2">|
+                                <a href="#">
+                                    <i class="bi bi-calendar"></i> <span>${formattedDate}</span>
+                                </a>
+                            </li>
+                            <li class="post-category me-2">|
+                                <a href="#">
+                                    <i class="bi bi-tag"></i> <span>${post.category || 'Uncategorized'}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="blog-content mt-3">
+                        ${post.content}
+                    </div>
+                </div>
+            </div>
+        `;
+        eventList.appendChild(postDiv);
+    });
+    updatePagination(totalPages);
+}
+    
+
+document.addEventListener('DOMContentLoaded', function () {
+        fetchEvents(); // Fetch events from the server
+    });
+
+    // Function to filter event posts based on the selected filter
+    function filterEventPosts(filter, searchQuery = '') {
+
+      let filteredPosts = [];
+      const today = new Date();
+
+      // Hide the calendar by default
+      document.getElementById('calendar').style.display = 'none';
+      document.getElementById('weekly-calendar').style.display = 'none';
+
+      // Filter posts based on the search query
+      if (searchQuery) {
+        filteredPosts = eventPosts.filter(post => {
+          const title = post.title ? post.title.toLowerCase() : '';
+          const description = post.description ? post.description.toLowerCase() : '';
+          return title.includes(searchQuery) || description.includes(searchQuery);
+        });
+        console.log('Filtered by search query:', filteredPosts);
+      } else {
+        filteredPosts = eventPosts;
+      }
+
+      switch (filter) {
+        case 'weekly':
+          document.getElementById('weekly-calendar').style.display = 'block';
+          renderWeeklyCalendar();
+          return;
+        case 'monthly':
+          const thisMonth = today.getMonth();
+          const thisYear = today.getFullYear();
+          filteredPosts = filteredPosts.filter(post => {
+            const postDate = new Date(post.date);
+            return postDate.getMonth() === thisMonth && postDate.getFullYear() === thisYear;
+          });
+          document.getElementById('calendar').style.display = 'block';
+          renderCalendar();
+          showEventPosts(filteredPosts);
+          return;
+        case 'list':
+        default:
+          showEventPosts(filteredPosts);
+          break;
+      }
+    }
+
+
+
+    // Call functions to generate content
+    document.addEventListener('DOMContentLoaded', function () {
+      const searchInput = document.getElementById('search-input');
+      const searchButton = document.getElementById('search-button');
+
+      // Perform search when search button is clicked
+      searchButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        performSearch();
+      });
+
+      // Perform search when Enter is pressed in the search input
+      searchInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          performSearch();
+        }
+      });
+
+      // Show/Hide Clear Button Based on Input
+      searchInput.addEventListener('input', function () {
+        if (searchInput.value.trim() !== '') {
+          searchButton.querySelector('.bi-search').style.display = 'none'; // Hide search icon
+        } else {
+          searchButton.querySelector('.bi-search').style.display = 'block'; // Show search icon
+        }
+      });
+
+
+      // Initialize the page with the default event list
+      filterEventPosts('list');
+      generateRecentPosts();
+      generateCategories();
+    });
+
+
+    //FUNTION
+    function updatePagination(totalPages) {
+      const paginationContainer = document.querySelector('.pagination');
+      if (!paginationContainer) {
+        console.error('Pagination container element not found.');
+        return;
+      }
+
+      paginationContainer.innerHTML = '';
+
+      const createPageItem = (pageNum, text, isDisabled = false) => {
+        const li = document.createElement('li');
+        li.className = `page-item ${isDisabled ? 'disabled' : ''}`;
+        const a = document.createElement('a');
+        a.className = 'page-link';
+        a.href = '#';
+        a.innerHTML = text;
+        a.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (!isDisabled) {
+            currentPage = pageNum;
+            filterEventPosts(getCurrentFilter(), document.getElementById('search-input').value.toLowerCase());
+          }
+        });
+        li.appendChild(a);
+        return li;
+      };
+
+      // Previous button
+      paginationContainer.appendChild(createPageItem(currentPage - 1, '<i class="bi bi-arrow-left-short"></i>', currentPage === 1));
+
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        paginationContainer.appendChild(createPageItem(i, i));
+      }
+
+      // Next button
+      paginationContainer.appendChild(createPageItem(currentPage + 1, '<i class="bi bi-arrow-right-short"></i>', currentPage === totalPages));
+    }
+
+
+    function performSearch() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const currentFilter = getCurrentFilter();
+      console.log(`Search query: ${query}, Current filter: ${currentFilter}`);
+      filterEventPosts('list', query);
+    }
+
+
+    function getCurrentFilter() {
+      if (document.getElementById('weekly-calendar').style.display === 'block') {
+        return 'weekly';
+      } else if (document.getElementById('calendar').style.display === 'block') {
+        return 'monthly';
+      } else {
+        return 'list';
+      }
+    }
+
+    // Function to initialize FullCalendar
+    let currentlySelectedDate = null; // Variable to track the currently selected date
+
+    function renderCalendar(view = 'dayGridMonth') {
+      var calendarEl = document.getElementById('calendar');
+
+      // Define the event source function to load events for the current month
+      const eventSource = {
+        events: function (info, successCallback, failureCallback) {
+          const start = info.startStr; // Start of the visible month (YYYY-MM-DD)
+          const end = info.endStr;     // End of the visible month (YYYY-MM-DD)
+
+          // Filter events to show only those within the current month
+          const filteredEvents = eventPosts.filter(post => {
+            const postDate = new Date(post.date); // Convert post.date to Date object
+            return postDate >= new Date(start) && postDate < new Date(end);
+          }).map(post => ({
+            title: post.title,
+            start: post.date,
+            author: post.author,
+            imgSrc: post.imgSrc,
+            link: post.link,
+            content: post.content,
+            category: event.category
+          }));
+
+          // Send filtered events to the calendar
+          successCallback(filteredEvents);
+
+          // Show the filtered events in the blog-container automatically
+          showEventPosts(filteredEvents);
+        }
+      };
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: view, // Display the specified view
+        eventSources: [eventSource], // Use the event source defined above
+        fixedWeekCount: false, // Allow variable number of weeks
+
+        eventContent: function (arg) {
+          let dotEl = document.createElement('div');
+          dotEl.classList.add('fc-event-dot'); // Custom dot for event
+
+          let titleEl = document.createElement('span');
+          titleEl.classList.add('fc-event-title'); // Custom class for event title
+          titleEl.innerHTML = arg.event.title;
+
+          let arrayOfDomNodes = [dotEl, titleEl];
+          return { domNodes: arrayOfDomNodes };
+        },
+
+        // Change "today" to "Today"
+        buttonText: {
+          today: 'Today'
+        },
+
+        // Triggered when view or date changes
+        datesSet: function (info) {
+          // Explicitly refetch events to reflect the correct month
+          calendar.refetchEvents();
+        },
+
+        // Handle date click event
+        dateClick: function (info) {
+          const selectedDate = info.dateStr; // Get the clicked date in 'YYYY-MM-DD' format
+
+          // Clear previous selection if there is one
+          if (currentlySelectedDate) {
+            const previousCell = document.querySelector(`.fc-daygrid-day[data-date='${currentlySelectedDate}']`);
+            if (previousCell) {
+              previousCell.classList.remove('selected'); // Remove the selected class
+            }
+          }
+
+          // Highlight the newly selected date
+          currentlySelectedDate = selectedDate; // Update the currently selected date
+          const selectedCell = document.querySelector(`.fc-daygrid-day[data-date='${selectedDate}']`);
+          if (selectedCell) {
+            selectedCell.classList.add('selected'); // Add the selected class
+          }
+
+          // Filter event posts for the selected date
+          const formattedSelectedDate = new Date(selectedDate).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          const filteredPosts = eventPosts.filter(post => new Date(post.date).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) === formattedSelectedDate);
+
+          // Show the events for that date in the blog-container
+          showEventPosts(filteredPosts);
+        }
+      });
+
+      calendar.render();
+    }
+
+    let currentlySelectedWeeklyDate = null; // Variable to track the currently selected date in the weekly calendar
+
+    // Function to initialize FullCalendar (Weekly)
+    function renderWeeklyCalendar() {
+      const calendarEl = document.getElementById('weekly-calendar');
+
+      // Define the event source function to load events for the current week
+      const eventSource = {
+        events: function (info, successCallback, failureCallback) {
+          const start = info.startStr; // Start of the visible week (YYYY-MM-DD)
+          const end = info.endStr;     // End of the visible week (YYYY-MM-DD)
+
+          // Filter events to show only those within the current week
+          const filteredEvents = eventPosts.filter(post => {
+            const postDate = new Date(post.date); // Convert post.date to Date object
+            return postDate >= new Date(start) && postDate < new Date(end);
+          }).map(post => ({
+            eventID: post.eventID,
+            title: post.title,
+            date: post.date,   // Use correct date format
+            author: post.author,
+            imgSrc: post.imgSrc,
+            link: `eventDetail.html?eventID=${post.eventID}`, 
+            content: post.content,
+            category: event.category
+          }));
+
+          // Send filtered events to the calendar
+          successCallback(filteredEvents);
+
+          // Show the filtered events in the event container automatically
+          showEventPosts(filteredEvents);
+        }
+      };
+
+      let weeklyCalendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridWeek', // Display week view without time
+        eventSources: [eventSource], // Use the event source defined above
+
+        eventContent: function (arg) {
+          let dotEl = document.createElement('div');
+          dotEl.classList.add('fc-event-dot'); // Custom dot for event
+
+          let titleEl = document.createElement('span');
+          titleEl.innerHTML = arg.event.title; // Event title next to dot
+
+          let arrayOfDomNodes = [dotEl, titleEl];
+          return { domNodes: arrayOfDomNodes };
+        },
+
+        // Adding week number as title on the left side
+        headerToolbar: {
+          left: 'customWeekNumber',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        customButtons: {
+          customWeekNumber: {
+            text: `Week ${getWeekNumber(new Date())}`, // Custom text for the week number
+            click: function () {
+              // Navigate to the current week when the button is clicked
+              weeklyCalendar.today();
+            }
+          }
+        },
+
+        // Modify the "today" button to be capitalized as "Today"
+        buttonText: {
+          today: 'Today',
+        },
+
+        // Triggered when view or date changes
+        datesSet: function (info) {
+          // Update the custom week number when navigating through weeks
+          const weekNumber = getWeekNumber(info.start);
+          const customWeekButton = document.querySelector('.fc-customWeekNumber-button');
+          customWeekButton.innerHTML = `Week ${weekNumber}`;
+
+          // Explicitly refetch events to reflect the correct week
+          weeklyCalendar.refetchEvents();
+        },
+
+        // Fix the "today" function and implement view change when clicking the week button from day view
+        navLinks: true, // Can click day/week names to navigate views
+        contentHeight: 'auto',
+
+        dateClick: function (info) {
+          const selectedDate = info.dateStr; // Get the clicked date in 'YYYY-MM-DD' format
+
+          // Clear previous selection if there is one
+          if (currentlySelectedDate) {
+            const previousCell = document.querySelector(`.fc-daygrid-day[data-date='${currentlySelectedDate}']`);
+            if (previousCell) {
+              previousCell.classList.remove('selected'); // Remove the selected class
+            }
+          }
+
+          // Highlight the newly selected date
+          currentlySelectedDate = selectedDate; // Update the currently selected date
+          const selectedCell = document.querySelector(`.fc-daygrid-day[data-date='${selectedDate}']`);
+          if (selectedCell) {
+            selectedCell.classList.add('selected'); // Add the selected class
+          }
+
+          const formattedSelectedDate = new Date(selectedDate).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          // Filter event posts for the selected date
+          const filteredPosts = eventPosts.filter(post => new Date(post.date).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) === formattedSelectedDate);
+
+          // Show the events for that date in the blog-container
+          showEventPosts(filteredPosts);
+        },
+
+        // Automatically switch to week view when user clicks the week button in day view
+        viewDidMount: function (info) {
+          const weekButton = document.querySelector('.fc-customWeekNumber-button');
+          weekButton.addEventListener('click', function () {
+            if (weeklyCalendar.view.type !== 'dayGridWeek') {
+              weeklyCalendar.changeView('dayGridWeek'); // Change view to week
+            }
+          });
+        }
+      });
+
+      weeklyCalendar.render();
+
+      // Function to get the current week number for a given date
+      function getWeekNumber(date) {
+        const startOfYear = new Date(date.getFullYear(), 0, 1);
+        const daysPastSinceStartOfYear = (date - startOfYear) / 86400000;
+        return Math.ceil((daysPastSinceStartOfYear + startOfYear.getDay() + 1) / 7);
+      }
+    }
+
+
+    // Function to generate recent posts
+    function generateRecentPosts() {
+      const recentPostsContainer = document.querySelector('.recent-posts');
+
+      // Sort the posts by date in descending order (latest first)
+      const sortedPosts = eventPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Limit to the first 3 posts
+      const limitedPosts = sortedPosts.slice(0, 3);
+
+      // Generate the HTML content for the limited posts
+      recentPostsContainer.innerHTML = limitedPosts.map(post => {
+          const formattedDate = new Date(post.date).toLocaleDateString('en-GB', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+          });
+          return `
+              <li>
+                  <div class="d-flex flex-row mb-3">
+                      <figure class="cart__prd-img">
+                          <a href="eventDetail.html?eventID=${post.eventID}">
+                              <img src="${post.imgSrc}" alt="" class="rounded">
+                          </a>
+                      </figure>
+                      <div class="w-100 ms-4">
+                          <h4 class="cart-title"><a href="eventDetail.html?eventID=${post.eventID}">${post.title}</a></h4>
+                          <p class="post-date">
+                              <a href="#">
+                                  <i class="bi bi-calendar3 me-2"></i>
+                                  <span class="small">${formattedDate}</span>
+                              </a>
+                          </p>
+                      </div>
+                  </div>
+              </li>
+          `;
+      }).join('');
+    }
+
+    // Call the function to generate recent posts
+    generateRecentPosts();
+
+    // Function to generate categories
+    function generateCategories() {
+      const categoriesContainer = document.querySelector('.categories');
+      categoriesContainer.innerHTML = categories.map(category => `
+        <li><a href="#">${category.name} <span>(${category.count})</span></a></li>
+      `).join('');
+    }
+
+
+  </script>
+</body>
+
+</html>

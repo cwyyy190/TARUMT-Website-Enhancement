@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Events</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+
+
+</head>
+
+<script>
+  // Function to load HTML content
+  function loadHTML(elementId, filePath) {
+    fetch(filePath)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById(elementId).innerHTML = data;
+      })
+      .catch(error => console.error('Error loading HTML:', error));
+  }
+
+  // Load header and footer
+  loadHTML('header', 'header.html');
+  loadHTML('footer', 'footer.html');
+</script>
+
+<body>
+  <!-- preloader -->
+  <div id="preloader"></div>
+  <!-- Progress circle scroll to top -->
+  <div id="progress">
+    <div id="progress-value">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+  </div>
+  <!-- Black Transparent Screen -->
+  <span class="screen-darken"></span>
+  <!-- End -->
+
+
+
+  <!-- Header section -->
+  <header class="header" id="header">
+    <div class="container">
+      <!-- Navigation Wrapper -->
+      <div id="header"></div>
+
+      <!-- End -->
+    </div>
+  </header>
+  <!-- End -->
+
+  <!-- main section -->
+  <main>
+    <!-- Full width Banner -->
+    <section class="bg-color bg-pos-full bg-3">
+      <div class="container py-5">
+        <div class="row py-5">
+          <div class="col-md-6 header-txt d-flex flex-column justify-content-center">
+            <h2 class="display-6">Programme</h2>
+            <nav aria-label="breadcrumb" class="page__header-navigation d-inline-block mt-3">
+              <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Programme</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-md-6 text-center">
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Full width Banner End -->
+
+    <!-- Services Section -->
+    <section class="section">
+      <div class="container">
+        <div class="row gy-4">
+
+          <!-- Col -->
+          <div class="col-12 col-lg-12 col-xl-12 order-1 mb-5">
+            <!-- Product Listing Top Bar -->
+            <div class="row g-4 align-items-center mb-5">
+              <!-- Col -->
+              <div class="page-title col-md-7 col-xl-8">
+                <h3>Programme</h3>
+                <p class="mb-0 text-muted">Showing 1– 6 of 30 results</p>
+              </div>
+              <!-- Col End -->
+              <!-- Col -->
+              <div class="col-md-5 col-xl-4 ms-md-auto text-md-end">
+                <div class="select-dropdown">
+                  <select name="form-select" class="form-select">
+                    <option value="popularity" selected>Sort by popularity</option>
+                    <option value="rating">Sort by rating</option>
+                    <option value="newness">Sort by newness</option>
+
+                  </select>
+                </div>
+              </div>
+              <!-- Col End -->
+            </div>
+            <!-- Product Listing Top Bar End -->
+            <!-- Product Listing -->
+            <div class="row g-4 row-cols-1 row-cols-md-3" id="row g-4 row-cols-1 row-cols-md-3"> <!-- End -->
+
+
+            </div>
+            <!-- Item Card -->
+
+            <script>
+
+              // Get the level parameter from the URL
+              const urlParams = new URLSearchParams(window.location.search);
+              const level = urlParams.get('level');  // This will get the value of 'level' from the URL, e.g., 'Foundation'
+
+              
+
+              //Fetch data from API
+              fetch('http://localhost:8080/programmes')
+                .then(response => response.json())
+                .then(data => {
+
+                  // Filter the courses based on the level parameter from the URL
+                  const filteredCourses = data.filter(course => course.level.toLowerCase() === level.toLowerCase());
+
+                  // Update the total count of filtered courses
+                  const totalCourses = filteredCourses.length;
+                  const totalCoursesText = document.querySelector('.mb-0.text-muted');
+                  totalCoursesText.innerHTML = `Showing  ${totalCourses} results`;
+
+                  const coursesContainer = document.getElementById('row g-4 row-cols-1 row-cols-md-3');
+
+                  // Loop through the data and create cards dynamically
+                  filteredCourses.forEach(course => {
+                    const courseCard = `
+                    <div class="col-md-6 col-lg-6 col-xl-4" data-aos="fade-right" data-aos-once="true" data-aos-duration="500" data-aos-delay="20">
+                        <div class="courses card rounded overflow-hidden">
+                            <!-- Item Image -->
+                            <div class="img-box">
+                                <a href="course-details.html?id=${course.id}">
+                                    <img src="assets/img/course-img-01.jpg" alt="" class="img-fluid">
+                                </a>
+                                <span class="c-category">${course.level}</span>
+                            </div>
+                            <!-- End -->
+                            <div class="p-4 card-body">
+                                <!-- Item Body Content -->
+                                <div class="course_small-info d-flex justify-content-between">
+                                    <span><i class="bi bi-clock"></i>${course.duration}</span>
+                                </div>
+                                <h3><a href="course-details.html?id=${course.id}">${course.name}</a></h3>
+                                <!-- Item Footer -->
+                                <div class="price__group">
+                                    <div class="price-box"><span>${course.fees}</span></div>
+                                    <a href="course-details.html?id=${course.id}" class="btn btn__read-more"> Know Details <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                    // Append the card to the container
+                    coursesContainer.innerHTML += courseCard;
+                  });
+                })
+                .catch(error => console.log('Error:', error));
+            </script>
+
+
+
+            <!-- Product Listing -->
+
+          </div>
+          <!-- Col End -->
+        </div>
+      </div>
+    </section>
+    <!-- End -->
+
+
+
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+  <script>
+     // Function to load HTML content
+     function loadHTML(elementId, filePath) {
+       fetch(filePath)
+         .then(response => response.text())
+         .then(data => {
+           document.getElementById(elementId).innerHTML = data;
+         })
+         .catch(error => console.error('Error loading HTML:', error));
+     }
+ 
+     // Load header and footer
+     loadHTML('header', 'header.html');
+     loadHTML('footer', 'footer.html');
+   </script>
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <!-- type.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- function.js -->
+  <script src="path/to/typed.js"></script>
+  <script src="assets/js/function.js"></script>
+
+
+</body>
+
+</html>

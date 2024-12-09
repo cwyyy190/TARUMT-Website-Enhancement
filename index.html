@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- Swiper slider css -->
+  <link rel="stylesheet" href="assets/plugins/Swiper-slider/swiper-bundle.min.css">
+  <!-- Glightbox popup css -->
+  <link rel="stylesheet" href="assets/plugins/glightbox/glightbox.css">
+  <!-- Animate css for animation -->
+  <link rel="stylesheet" href="assets/plugins/animate-css/animate.css">
+  <!-- aos css (Animation on scroll ) -->
+  <link rel="stylesheet" href="assets/plugins/aos/aos.css">
+  <!-- Fontawesome Icons css -->
+  <link rel="stylesheet" href="assets/plugins/icons/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/brands.css">
+  <link rel="stylesheet" href="assets/plugins/icons/css/solid.css">
+  <!-- Google Fonts Icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
+  <!-- Style css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+
+<style>
+  .blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the space between cards */
+  justify-content: space-between; /* Adjusts spacing between cards horizontally */
+  padding: 10%;
+}
+
+.event-card {
+  flex: 1 1 calc(33.333% - 20px); /* Each card takes up 1/3 of the container */
+  box-sizing: border-box;
+}
+
+/* Add some media queries for responsiveness */
+@media (max-width: 768px) {
+  .event-card {
+    flex: 1 1 calc(50% - 20px); /* On smaller screens, 2 cards per row */
+  }
+}
+
+@media (max-width: 576px) {
+  .event-card {
+    flex: 1 1 100%; /* On mobile, 1 card per row */
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+  <!-- Black Transparent Screen -->
+  <span class="screen-darken"></span>
+  <!-- End -->
+
+  <!-- Header section -->
+  <header>
+    <div id="header"></div>
+
+  </header>
+  <!-- End -->
+  </section>
+
+  <!-- Chatbot section -->
+  <div>
+    <button class="chatbot-toggler">
+      <span class="material-symbols-outlined">mode_comment</span>
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="chatbot">
+      <header>
+        <h2 style="margin: 0px;">Chatbot</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Hi there! How can I hope you today?</p>
+        </li>
+
+      </ul>
+      <div class="chat-input">
+        <textarea placeholder="Enter a message..." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined">send</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- main section -->
+  <main>
+    <!-- Hero Banner Slider -->
+    <section class="position-relative gradient-bg01">
+      <div class="container-fluid px-0">
+        <div class="row">
+          <div class="col-md-6">
+            <div class=" carousel-caption text-start center-align position-relative">
+              <h1 class="animate__animated animate__zoomInUp">
+                Faculty of Computing and Information Technology
+                (FOCS)
+              </h1>
+              <p class="animate__animated animate__zoomInUp">
+                in Tunku Abdul Rahman University of Management and Technology
+              </p>
+              <div class="animate__animated animate__fadeInDown ">
+                <a class="btn btn-primary btn-size shadow-1" href="contact.html">Enroll now </a>
+                <a class="btn-size call-btn mt-4 ms-n4" href="#">
+                  <i class="bi bi-telephone"></i>
+                  <div class="call-btn-txt">
+                    <span>Have Enquiry?</span>
+                    <span>+603-41423166 / 018 925 1001</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="top-left anime-left-right d-none d-lg-block">
+              <img src="assets/img/planet.png" alt="img">
+            </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-end">
+            <div class="position-relative zindex-1">
+              <img src="assets/img/girl.png" alt="Image" class="img-fluid">
+              <div class="flex-box-wrapper d-none d-lg-block">
+                <div class="fact-box text-center anime-left-right">
+                  <div class="icon">
+                    <i class="bi bi-person-fill"></i>
+                  </div>
+                  <div class="info">
+                    <span>Active Students</span>
+                    <h4 class="count">3500+</h4>
+                  </div>
+                </div>
+                <div class="fact-box text-center bounce-animate4">
+                  <div class="icon">
+                    <i class="bi bi-mortarboard"></i>
+                  </div>
+                  <div class="info">
+                    <span>Founded on</span>
+                    <h4 class="count">1972</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="right-top">
+                <i class="bi bi-mortarboard"></i>
+              </div>
+              <div class="left-top">
+                <i class="bi bi-journal-text"></i>
+              </div>
+              <div class="left-bottom d-none d-lg-block">
+                <img src="assets/img/right-arrow.png" alt="img" width="120px" height="auto">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End -->
+
+    <!-- About Us Section -->
+    <section class="section about-section position-relative zindex-1">
+      <div class="container">
+        <div class="row g-4 gx-5 align-items-center">
+          <div class="col-md-6">
+            <div class="about-img-wrap">
+              <img src="assets/img/about-img-1.png" alt="Image">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="about-content">
+              <h4 class="subheading-style-01">Get To Know About Us</h4>
+              <h2>Providing Best Education For Brighter Future</h2>
+              <p>FOCS is in TOP 5 of Highest Graduates and Graduates' Salary above RM4,000</p>
+              <div class="row mt-0">
+                <div class="col-6 d-flex gap-4 about-usp">
+                  <div class="icon icon-bg icon-circle icon_size-sm">
+                    <i class="fa-solid fa-user-tie"></i>
+                  </div>
+                  <div class="about-usp-content lh-1">
+                    <h5>3500+</h5> Active Students
+                  </div>
+                </div>
+                <div class="col-6 d-flex gap-4 about-usp">
+                  <div class="icon icon-bg icon-circle icon_size-sm">
+                    <i class="fa-solid fa-video"></i>
+                  </div>
+                  <div class="about-usp-content lh-1">
+                    <h5>5</h5>Departments
+                  </div>
+                </div>
+                <div class="col-6 d-flex gap-4 about-usp">
+                  <div class="icon icon-bg icon-circle icon_size-sm">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </div>
+                  <div class="about-usp-content lh-1">
+                    <h5>1500</h5>Top Lessons
+                  </div>
+                </div>
+                <div class="col-6 d-flex gap-4 about-usp">
+                  <div class="icon icon-bg icon-circle icon_size-sm">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                  </div>
+                  <div class="about-usp-content lh-1">
+                    <h5>6</h5>Research Centres
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn btn-primary btn-size btn-mt">Discover More</a>
+            </div>
+          </div>
+        </div>
+        <!-- End -->
+
+      </div>
+
+    </section>
+    <!-- End -->
+
+    <!-- Features Section -->
+    <section class="section position-relative zindex-1 bg-color-light">
+      <div class="container">
+        <div class="row section-heading-txt justify-content-center aos-init aos-animate" data-aos="fade-up"
+          data-aos-once="ture">
+          <!-- Heading -->
+          <div class="col-lg-8 section__heading-wrap align-items-center">
+            <h4 class="subheading-style-01">Programme </h4>
+            <h2 class="heading-text">Browse By Programme</h2>
+          </div>
+        </div>
+        <div class="row g-4 row-cols-1 row-cols-md-4">
+          <!-- Item Card -->
+          <div class="col-md-6 col-lg-3 aos-init aos-animate" data-aos="fade-right" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="60">
+            <div class="card icon-box-wrapper rounded overflow-hidden">
+              <!-- Item -->
+              <a href="courses.html?level=Foundation">
+                <div class="icon-box py-3 px-4">
+                  <i class="fa-solid fa-bullhorn fs-1"></i>
+                  <h3>Foundation</h3>
+                </div>
+              </a>
+              <!-- End -->
+            </div>
+          </div>
+          <!-- End -->
+          <!-- Item Card -->
+          <div class="col-md-6 col-lg-3 aos-init aos-animate" data-aos="fade-right" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="60">
+            <div class="card icon-box-wrapper rounded overflow-hidden">
+              <!-- Item -->
+              <a href="courses.html?level=Diploma">
+                <div class="icon-box py-3 px-4">
+                  <i class="fa-solid fa-laptop-code fs-1"></i>
+                  <h3>Diploma</h3>
+                </div>
+              </a>
+              <!-- End -->
+            </div>
+          </div>
+          <!-- End -->
+          <!-- Item Card -->
+          <div class="col-md-6 col-lg-3 aos-init aos-animate" data-aos="fade-right" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="60">
+            <div class="card icon-box-wrapper rounded overflow-hidden">
+              <!-- Item -->
+              <a href="courses.html?level=Bachelor">
+                <div class="icon-box py-3 px-4">
+                  <i class="fa-solid fa-layer-group fs-1"></i>
+                  <h3>Bachelor</h3>
+                </div>
+              </a>
+              <!-- End -->
+            </div>
+          </div>
+          <!-- End -->
+          <!-- Item Card -->
+          <div class="col-md-6 col-lg-3 aos-init aos-animate" data-aos="fade-right" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="60">
+            <div class="card icon-box-wrapper rounded overflow-hidden">
+              <!-- Item -->
+              <a href="courses.html?level=Postgraduate">
+                <div class="icon-box py-3 px-4">
+                  <i class="fa-brands fa-python fs-1"></i>
+                  <h3>Postgraduate</h3>
+                </div>
+              </a>
+              <!-- End -->
+            </div>
+          </div>
+          <!-- End -->
+          <!-- Item Card -->
+          <div class="col-md-6 col-lg-3 aos-init aos-animate" data-aos="fade-right" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="60">
+            <div class="card icon-box-wrapper rounded overflow-hidden">
+
+            </div>
+          </div>
+          <!-- End -->
+
+        </div>
+
+    </section>
+    <!-- End -->
+
+   
+    <!-- End -->
+
+
+    <!-- Testimonials -->
+    <section class="section bg-color-light">
+      <div class="container">
+        <div class="row section-heading-txt justify-content-center" data-aos="fade-up" data-aos-once="ture">
+          <!-- Heading -->
+          <div class="col-lg-6 section__heading-wrap align-items-center">
+            <h4 class="subheading-style-01">Our Alumni</h4>
+            <h2 class="heading-text"> What Our Alumni Says <br class="d-none d-xl-block" />About Us</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <!-- Testimonials Content -->
+          <div class="col-md-12 col-lg-9 testi__comments-wrap" data-aos="fade-up" data-aos-once="ture"
+            data-aos-duration="700" data-aos-delay="20">
+            <div id="testimonials__slider" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <!-- Testimonial Comment one -->
+                <div class="carousel-item text-center active py-4 px-5">
+                  <div class="d-md-flex">
+                    <div class="testi-content flex-column align-items-center justify-content-center me-5">
+                      <div class="test-img">
+                        <img src="assets/img/tt3.png" alt="" class="">
+                      </div>
+                      <div class="content-group text-center mt-3">
+                        <h3>Lim Jun Rong</h3>
+                        <span>Graduated in 2022</span>
+                      </div>
+                    </div>
+                    <div class="testimonials-box text-start">
+                      <i class="bi bi-quote"></i>
+                      <p>I love that TAR UMT engages with the industrial players and involves students in various
+                        real-world projects, industrial training and competitions. TAR UMT's Beyond Education philosophy
+                        is truly holistic approach to prepare students for life after graduation. Also, my lecturers and
+                        tutors are very dedicated and passionate.I truly enjoyed my tertiary education journey at TAR
+                        UMT and am proud to call myself a TARCian. Once a TARCian, always a TARCian.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Testimonial Comment Two -->
+                <div class="carousel-item text-center py-4 px-5">
+                  <div class="d-md-flex">
+                    <div class="testi-content flex-column align-items-center justify-content-center me-5">
+                      <div class="test-img">
+                        <img src="assets/img/tt2.png" alt="" class="img-fluid">
+                      </div>
+                      <div class="content-group mt-3">
+                        <h3>Foo Jia Ern</h3>
+                        <span>Graduated in 2022</span>
+                      </div>
+                    </div>
+                    <div class="testimonials-box text-start">
+                      <i class="bi bi-quote"></i>
+                      <p>I thoroughly enjoyed my studies at TAR UMT and never doubted my decision to enroll. My
+                        programme not only nurtured my passion to become a developer but also equipped me with up to
+                        date knowledge and skills, allowing me to thrive upon graduation. The facilities available
+                        simulated real-life scenarios and the overall experience also allowed me to develop vital soft
+                        skills such as teamwork, communication and flexibility etc, which enabled me to hit the ground
+                        running in a real world environment.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Testimonial Comment Three -->
+                <div class="carousel-item text-center py-4 px-5">
+                  <div class="d-md-flex">
+                    <div class="testi-content flex-column align-items-center justify-content-center me-5">
+                      <div class="test-img">
+                        <img src="assets/img/tt1.png" alt="" class="">
+                      </div>
+                      <div class="content-group mt-3">
+                        <h3>Cheng Zhi Ying</h3>
+                        <span>Interior Designer</span>
+                      </div>
+                    </div>
+                    <div class="testimonials-box text-start">
+                      <i class="bi bi-quote"></i>
+                      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum eum nemo iusto dolorum aliquam
+                        odit. Iste corrupti molestias quis porro, totam voluptatibus repellendus odit perspiciatis.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Slider controllers -->
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimonials__slider" data-bs-slide-to="0" class="active"
+                  aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimonials__slider" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#testimonials__slider" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+              </div>
+              <!-- End -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Counter Start -->
+        <div class="row mt-5">
+          <div class="counter-box col-md-6 col-lg-3 text-center">
+            <div class="counter-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="counter-content">
+              <span class="counter">3500</span><span>+</span>
+              <p>Active Students</p>
+            </div>
+          </div>
+          <div class="counter-box col-md-6 col-lg-3 text-center">
+            <div class="counter-icon">
+              <i class="fa-solid fa-book"></i>
+
+            </div>
+            <div class="counter-content">
+              <span class="counter">16</span>
+              <p>Programmes</p>
+            </div>
+          </div>
+          <div class="counter-box col-md-6 col-lg-3 text-center">
+            <div class="counter-icon">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="counter-content">
+              <span class="counter">5 </span>
+              <p>Departments</p>
+            </div>
+          </div>
+          <div class="counter-box col-md-6 col-lg-3 text-center">
+            <div class="counter-icon">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="counter-content">
+              <span class="counter">10</span>
+              <p>MDEC PDTI Recognition</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+    <!-- End -->
+
+    <!-- Our Instructors -->
+    <section class="section ">
+      <div class="container">
+        <div class="row section-heading-txt justify-content-center" data-aos="fade-up" data-aos-once="ture">
+          <!-- Heading -->
+          <div class="col-lg-6 section__heading-wrap">
+            <h4 class="subheading-style-01">Team</h4>
+            <h2 class="heading-text"> Our FOCS Team </h2>
+
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4 team-group" data-aos="fade-up" data-aos-once="ture" data-aos-duration="500"
+            data-aos-delay="20">
+            <div class="card team-member2">
+              <div class="team-img-wrap d-flex align-items-center justify-content-center">
+                <img src="assets/img/lsh.jpg" alt="" class="img-fluid">
+                <nav class="social__links-type2 d-flex justify-content-center mt-4">
+                  <a href="#"><i class="bi bi-twitter twitter-color"></i></a>
+                  <a href="#"><i class="bi bi-facebook facebook-color"></i></a>
+                  <a href="#"><i class="bi bi-instagram instagram-color"></i></a>
+                </nav>
+              </div>
+              <div class="card-body text-center">
+                <h4 class="card-title mb-0"><a href="instructors-details.html">Ts. Lim Shen Huoy</a></h4>
+                <span class="card-subtitle">Dean</span>
+                <p class="card-text mt-2">Academic</p>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 team-group" data-aos="fade-up" data-aos-once="ture" data-aos-duration="700"
+            data-aos-delay="80">
+            <div class="card team-member2">
+              <div class="team-img-wrap d-flex align-items-center justify-content-center">
+                <img src="assets/img/clm.jpg" alt="" class="img-fluid">
+                <nav class="social__links-type2 d-flex justify-content-center mt-4">
+                  <a href="#"><i class="bi bi-twitter twitter-color"></i></a>
+                  <a href="#"><i class="bi bi-facebook facebook-color"></i></a>
+                  <a href="#"><i class="bi bi-instagram instagram-color"></i></a>
+                </nav>
+              </div>
+              <div class="card-body text-center">
+                <h4 class="card-title mb-0"><a href="instructors-details.html"> Ts. Chok Len Mooi</a></h4>
+                <span class="card-subtitle">Deputy Dean</span>
+                <p class="card-text mt-2">Academic</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 team-group" data-aos="fade-up" data-aos-once="ture" data-aos-duration="1100"
+            data-aos-delay="120">
+            <div class="card team-member2">
+              <div class="team-img-wrap d-flex align-items-center justify-content-center">
+                <img src="assets/img/ocp.jpg" alt="" class="img-fluid">
+                <nav class="social__links-type2 d-flex justify-content-center mt-4">
+                  <a href="#"><i class="bi bi-twitter twitter-color"></i></a>
+                  <a href="#"><i class="bi bi-facebook facebook-color"></i></a>
+                  <a href="#"><i class="bi bi-instagram instagram-color"></i></a>
+                </nav>
+              </div>
+              <div class="card-body text-center">
+                <h4 class="card-title mb-0"><a href="instructors-details.html">Mr. Ooi Chun Pew </a></h4>
+                <span class="card-subtitle">Deputy Dean</span>
+                <p class="card-text mt-2">Research & Development</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Our Instructors End -->
+
+    <!-- Recent Blogs -->
+    <section class="section pt-0">
+      <div class="blog-container">
+        </div>  
+    </section>
+    <!-- End -->
+
+  </main>
+
+  <!-- Footer section -->
+  <div id="footer"></div>
+  <!-- Footer End -->
+
+
+  <!-- Bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- aos.js for animation on scroll -->
+  <script src="assets/plugins/aos/aos.js"></script>
+  <!-- Swiper slider js -->
+  <script src="assets/plugins/Swiper-slider/swiper-bundle.min.js"></script>
+  <!-- Glightbox js -->
+  <script src="assets/plugins/glightbox/glightbox.min.js"></script>
+  <!-- Script for Counter -->
+  <script src="assets/plugins/counter/jquery.min.js"></script>
+  <script src="assets/plugins/counter/waypoints.min.js"></script>
+  <script src="assets/plugins/counter/jquery.counterup.min.js"></script>
+  <!-- function.js -->
+  <script src="assets/js/function.js"></script>
+  <!-- index.js -->
+  <script src="assets/js/index.js" defer></script>
+
+</body>
+<script>
+  // Function to load HTML content
+  function loadHTML(elementId, filePath) {
+    fetch(filePath)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById(elementId).innerHTML = data;
+      })
+      .catch(error => console.error('Error loading HTML:', error));
+  }
+
+  // Load header and footer
+  loadHTML('header', 'header.html');
+  loadHTML('footer', 'footer.html');
+</script>
+<script>
+
+  let programmeData;
+  Promise.all([
+    fetch('http://localhost:8080/programmes').then(res => res.json()),
+    fetch('http://localhost:8080/branch').then(res => res.json()),
+    fetch('http://localhost:8080/programme_branch').then(res => res.json()),
+    fetch('http://localhost:8080/career_prospects').then(res => res.json())
+  ]).then(([programmesData, branchData, programmeBranchData, careerProspects]) => {
+
+
+    const mergedData = programmesData.map(programme => {
+
+      const relatedBranches = programmeBranchData
+        .filter(pb => pb.programme_id === programme.id)
+        .map(pb => ({
+          ...pb,
+          branch: branchData.find(branch => branch.id === pb.branch_id)
+        }));
+
+      return {
+        ...programme,
+        branches: programmeBranchData
+          .filter(pb => pb.programme_id === programme.id)
+          .map(pb => branchData.find(branch => branch.id === pb.branch_id)),
+        branches: relatedBranches,
+        careerProspects: careerProspects.filter(prospect => prospect.programme_id === programme.id)
+      };
+    });
+
+    console.log(programmeBranchData);
+    programmeData = mergedData;
+
+    // Dispatch event after data is ready
+    document.dispatchEvent(new CustomEvent('programmeDataReady', { detail: programmeData }));
+
+  }).catch(error => console.error('Error merging data:', error));
+
+</script>
+<script src="./assets/js/index.js"></script>
+<script>
+function fetchEvents() {
+  $.ajax({
+    url: 'http://localhost:8080/events', // Ensure this URL is correct for your server
+    method: 'GET',
+    success: function (data) {
+      // Map the event data, ensuring eventID is included
+      const eventPosts = data.map(event => ({
+        eventID: event.event_id,  // Ensure eventID is mapped
+        title: event.event_name,
+        date: event.event_date,
+        author: event.organizer_name,  // Assuming you will join this with organizer's name
+        imgSrc: event.eventIMG_url, // URL for event image
+        link: `eventDetail.html?eventID=${event.event_id}`, // Correct eventID in link
+        content: event.desc1
+      }));
+      displayEvents(eventPosts); // Display the events
+      filterEventPosts('list'); // Show events in the list view
+      generateRecentPosts(); // Generate the recent posts
+    },
+    error: function (error) {
+      console.error('Error fetching events:', error);
+    }
+  });
+}
+
+function displayEvents(events) {
+  const eventList = document.querySelector('.blog-container');
+  if (!eventList) {
+    console.error('Blog container element not found.');
+    return;
+  }
+  eventList.innerHTML = ''; // Clear previous content
+
+  // Sort events by date in descending order (latest first)
+  const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Add the title "Recent Events" at the top of the event container
+  const titleDiv = document.createElement('div');
+  titleDiv.className = 'row section-heading-txt justify-content-center';
+  titleDiv.setAttribute('data-aos', 'fade-up');
+  titleDiv.setAttribute('data-aos-once', 'true');
+  titleDiv.innerHTML = `
+    <div class="col-lg-6 section__heading-wrap align-items-center">
+      <h2 class="heading-text">Events</h2>
+    </div>
+  `;
+  eventList.appendChild(titleDiv);
+
+  // Create a new row for the event cards
+  const eventsRow = document.createElement('div');
+  eventsRow.className = 'row g-4';
+
+  // Limit to the first 3 posts after sorting
+  const limitedEvents = sortedEvents.slice(0, 3);
+
+  limitedEvents.forEach((event, index) => {
+    const eventDiv = document.createElement('div');
+    eventDiv.className = 'col-md-6 col-lg-4';
+    eventDiv.setAttribute('data-aos', 'fade-up');
+    eventDiv.setAttribute('data-aos-once', 'true');
+    eventDiv.setAttribute('data-aos-duration', `${500 + index * 200}`); // Adjust duration
+    eventDiv.setAttribute('data-aos-delay', `${20 + index * 60}`); // Adjust delay
+    
+    eventDiv.innerHTML = `
+      <!-- Blog Box -->
+      <div class="blog-box shadow">
+        <!-- Blog Image -->
+        <figure class="card-img-top position-relative overlay">
+          <img src="${event.imgSrc}" alt="${event.title}">
+        </figure>
+        <!-- End -->
+
+        <!-- Blog Body -->
+        <div class="card-body">
+          <div class="blog-header mb-2">
+            <h3><a href="${event.link}">${event.title}</a></h3>
+          </div>
+          <!-- Blog meta -->
+          <div class="blog-meta-wrapper p-0 border-0">
+            <ul class="d-flex">
+              <li class="post-author d-flex">
+                <i class="fa-solid fa-user"></i>
+                <span></span>
+                <span><a href="#">${event.author}</a></span>
+              </li>
+              <li class="post-comment me-2">|
+                <a href="#">
+                  <i class="bi bi-calendar"></i> 
+                  <span>${new Date(event.date).toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- End -->
+          <div class="blog-content mt-3">
+            ${event.content}
+          </div>
+        </div>
+        <!-- End -->
+      </div>
+      <!-- End -->
+    `;
+    eventsRow.appendChild(eventDiv);
+  });
+
+  // Append the row of events to the container
+  eventList.appendChild(eventsRow);
+
+  // Optional: Add a "More Events" button at the end if necessary
+  const moreEventsBtn = document.createElement('div');
+  moreEventsBtn.className = 'text-center btn-mt';
+  moreEventsBtn.innerHTML = `
+    <a href="events.html" class="btn btn-primary btn-size">More Events</a>
+  `;
+  eventList.appendChild(moreEventsBtn);
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetchEvents();
+  });
+</script>
+</html>
