@@ -1,2 +1,3 @@
-
+*.env
+*.key
 assets/plugins/aos/aos.js
