@@ -13,5 +13,16 @@ This repository contains the source code and documentation for the TARUMT Websit
 - Backend: MySQL
 - Tools: Git, Visual Studio Code
 
-![Chatbot](https://github.com/cwyyy190/TARUMT-Website-Enhancement/tree/main/assets/readme/chatbot.png)
-<img src="./assets/readme/chatbot.pngg" alt="chatbot" width="500"/>
+## Project Showcase
+- AI Assistant
+<img src="./assets/readme/chatbot.png" alt="chatbot" width="600"/>
+
+- Course details
+<img src="./assets/readme/courseDetails.png" alt="coursedetails" width="600"/>
+
+- Qualification checking
+<img src="./assets/readme/qualificationChecking.png" alt="qualification checking" width="600"/>
+
+- Event page & Registration
+<img src="./assets/readme/eventpage.png" alt="eventpage" width="600"/>  
+
