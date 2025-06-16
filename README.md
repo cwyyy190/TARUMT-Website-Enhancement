@@ -12,3 +12,6 @@ This repository contains the source code and documentation for the TARUMT Websit
 - Frontend: HTML5, CSS3, JavaScript, Bootstrap
 - Backend: MySQL
 - Tools: Git, Visual Studio Code
+
+![Chatbot](https://github.com/cwyyy190/TARUMT-Website-Enhancement/tree/main/assets/readme/chatbot.png)
+<img src="./assets/readme/chatbot.pngg" alt="chatbot" width="500"/>
